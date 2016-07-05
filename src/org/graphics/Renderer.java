@@ -20,9 +20,6 @@ public class Renderer {
 	private static final int GAME_WIDTH = 400;
 	private static final int GAME_HEIGHT = 250;
 	
-	private static int gameWidth = 0;
-	private static int gameHeight = 0;
-	
 	private static void getBestSize()  {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		
@@ -35,13 +32,11 @@ public class Renderer {
 			
 			if(canvasWidth > screenSize.width || canvasHeight > screenSize.height) {
 				canvasWidth -= GAME_WIDTH;
-				canvasHeight -= GAME_HEIGHT;
+				canvasHeight -= GAME_HEIGHT + GAME_HEIGHT / 10 ;
 				
 				done = true;
 			}
 		}
-		int xDiff = screenSize.width - canvasWidth;
-		int yDiff = screenSize.height - canvasHeight;
 	}	
 	
 	public static void init() {
@@ -61,8 +56,6 @@ public class Renderer {
 				Game.quit();
 			}
 		});
-		
-		
 		
 		frame.setVisible(true);
 	}
