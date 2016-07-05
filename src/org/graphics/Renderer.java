@@ -31,7 +31,7 @@ public class Renderer {
 			canvasHeight += GAME_HEIGHT;
 			
 			if(canvasWidth > screenSize.width || canvasHeight > screenSize.height) {
-				canvasWidth -= GAME_WIDTH;
+				canvasWidth -= GAME_WIDTH + GAME_WIDTH / 10 ;
 				canvasHeight -= GAME_HEIGHT + GAME_HEIGHT / 10 ;
 				
 				done = true;
