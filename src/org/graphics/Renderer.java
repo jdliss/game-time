@@ -3,6 +3,10 @@ package org.graphics;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import org.game.Game;
 
 public class Renderer {
 
@@ -21,6 +25,12 @@ public class Renderer {
 		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				Game.quit();
+			}
+		});
 		
 		frame.setVisible(true);
 	}
