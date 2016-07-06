@@ -3,6 +3,7 @@ package org.graphics;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
@@ -28,6 +29,10 @@ public class Renderer {
 	
 	private static int gameHeight = 0;
 	private static int gameWidth = 0;
+	
+	private static long lastFpsCheck = 0;
+	private static int currentFPS = 0;
+	private static int totalFrames = 0;
 	
 	private static void getBestSize()  {
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -62,6 +67,14 @@ public class Renderer {
 				VolatileImage vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
 				
 				while(true) {
+					totalFrames++;
+					
+					if (System.nanoTime() > lastFpsCheck + 1000000000) {
+						lastFpsCheck = System.nanoTime();
+						currentFPS = totalFrames;
+						totalFrames = 0;
+					}
+					
 					if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
 						vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
 					}
@@ -70,13 +83,16 @@ public class Renderer {
 					
 					g.setColor(Color.black);
 					g.fillRect(0, 0, gameWidth, gameHeight);
-					g.setColor(Color.red);
-					g.drawRect(10, 10, 100, 100);
+					
+					g.setColor(Color.yellow);
+					g.setFont(new Font("Futura", Font.PLAIN, 8)); 
+					g.drawString(String.valueOf(currentFPS), gameWidth - 20, 10);
+					
 					g.dispose();
+					
 					g = canvas.getGraphics();
 					g.drawImage(vImage, 0, 0, canvasWidth, canvasHeight, null);
 					g.dispose();
-				
 				}
 			}
 		};
