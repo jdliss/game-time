@@ -60,13 +60,18 @@ public class Renderer {
 			public void run() {
 				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
 				VolatileImage vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
+				
 				while(true) {
 					if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
 						vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
 					}
+					
 					Graphics g = vImage.getGraphics();
+					
 					g.setColor(Color.black);
 					g.fillRect(0, 0, gameWidth, gameHeight);
+					g.setColor(Color.red);
+					g.drawRect(10, 10, 100, 100);
 					g.dispose();
 					g = canvas.getGraphics();
 					g.drawImage(vImage, 0, 0, canvasWidth, canvasHeight, null);
@@ -75,6 +80,8 @@ public class Renderer {
 				}
 			}
 		};
+		thread.setName("rendering thread");
+		thread.start();
 	}
 	
 	private static void makeFullscreen() {
