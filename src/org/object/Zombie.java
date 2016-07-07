@@ -11,15 +11,19 @@ public class Zombie extends Mob {
 
 	public Zombie(float posX, float posY) {
 		super(posX, posY);
+		
+		width = 10;
+		height = 10;
 	}
 	
 	public void update(float deltaTime) {
-		goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
+		// goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(Color.gray);
 		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), 10, 10);
+		g.drawLine((int) (posX - width / 2), (int) (posY - width / 2), (int)World.playerOne.posX, (int)World.playerOne.posY);
 	}
 
 	public void goTo(float playerX, float playerY, float deltaTime) {
