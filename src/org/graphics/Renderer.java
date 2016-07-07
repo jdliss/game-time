@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.VolatileImage;
 
 import org.game.Game;
+import org.world.World;
 
 public class Renderer {
 
@@ -83,6 +84,9 @@ public class Renderer {
 					
 					g.setColor(Color.black);
 					g.fillRect(0, 0, gameWidth, gameHeight);
+					
+					World.update();
+					World.render(g);
 					
 					g.setColor(Color.yellow);
 					g.setFont(new Font("Futura", Font.PLAIN, 8)); 

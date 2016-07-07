@@ -76,5 +76,17 @@ public class ZombieTest {
 		assertEquals(newPosY, zombie.posY, 0);
 	}
 	
+//	@Test
+//	public void testUpdatesPathToMoveTowardPlayer() {
+//		Zombie zombie = new Zombie(0, 0);
+//		Player player = new Player(80, 80);
+//		
+//		zombie.goTo(player.posX, player.posY);
+//		player.moveX(100);
+//		// player -> 90, 80
+//		zombie.goTo(player.posX, player.posY);
+//		
+//		
+//	}
 
 }
