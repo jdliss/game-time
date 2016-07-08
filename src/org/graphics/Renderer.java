@@ -25,8 +25,8 @@ public class Renderer {
 	private static float canvasWidth = 0;
 	private static float canvasHeight = 0;
 	
-	private static final int GAME_WIDTH = 400;
-	private static final int GAME_HEIGHT = 250;
+	private static final int GAME_WIDTH = 600;
+	private static final int GAME_HEIGHT = 375;
 	
 	private static float gameHeight = 0;
 	private static float gameWidth = 0;

@@ -24,11 +24,11 @@ public class Sprite {
 		//
 	}
 	
-	public void moveX(int x) {
+	public void moveX(double x) {
 		this.posX += x;
 	}
 	
-	public void moveY(int y) {
+	public void moveY(double y) {
 		this.posY += y;
 	}
 }
