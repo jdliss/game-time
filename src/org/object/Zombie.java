@@ -7,7 +7,7 @@ import org.world.World;
 
 public class Zombie extends Mob {
 	
-	protected float runSpeed = 30.0f;
+	protected float runSpeed = 70.0f;
 	
 	private double xInc = 0;
 	private double yInc = 0;

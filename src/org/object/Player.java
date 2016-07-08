@@ -8,7 +8,7 @@ import org.input.Input;
 
 public class Player extends Mob {
 	
-	private float runSpeed = 30.0f;
+	private float runSpeed = 80.0f;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -19,7 +19,6 @@ public class Player extends Mob {
 	
 	public void update(float deltaTime) {
 		if (Input.getKey(KeyEvent.VK_W)) {
-			System.out.println("sfsdf");
 			moveY(-runSpeed * deltaTime);
 		}
 		
