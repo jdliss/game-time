@@ -68,7 +68,8 @@ public class Renderer {
 				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
 				VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 				
-				while(true) {
+				boolean thing = true;
+				while(thing) {
 					totalFrames++;
 					
 					if (System.nanoTime() > lastFpsCheck + 1000000000) {
@@ -137,8 +138,9 @@ public class Renderer {
 		frame.setVisible(true);
 		canvas.addKeyListener(new Input());
 		
+		canvas.requestFocusInWindow();
+
 		startRendering();
-		canvas.setFocusable(true);
 	}
 
 
