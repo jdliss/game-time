@@ -15,20 +15,21 @@ import java.awt.event.WindowEvent;
 import java.awt.image.VolatileImage;
 
 import org.game.Game;
+import org.world.World;
 
 public class Renderer {
 
 	private static Frame frame;
 	private static Canvas canvas;
 	
-	private static int canvasWidth = 0;
-	private static int canvasHeight = 0;
+	private static float canvasWidth = 0;
+	private static float canvasHeight = 0;
 	
-	private static final int GAME_WIDTH = 400;
-	private static final int GAME_HEIGHT = 250;
+	private static final int GAME_WIDTH = 600;
+	private static final int GAME_HEIGHT = 375;
 	
-	private static int gameHeight = 0;
-	private static int gameWidth = 0;
+	private static float gameHeight = 0;
+	private static float gameWidth = 0;
 	
 	private static long lastFpsCheck = 0;
 	private static int currentFPS = 0;
@@ -51,9 +52,9 @@ public class Renderer {
 				done = true;
 			}
 		}
-		int xDiff = screenSize.width - canvasWidth;
-		int yDiff = screenSize.height - canvasHeight;
-		int factor = canvasWidth / GAME_WIDTH;
+		float xDiff = screenSize.width - canvasWidth;
+		float yDiff = screenSize.height - canvasHeight;
+		float factor = canvasWidth / GAME_WIDTH;
 		gameWidth = canvasWidth / factor + xDiff / factor;
 		gameHeight = canvasHeight / factor + yDiff / factor;
 		canvasWidth = gameWidth * factor;
@@ -64,7 +65,7 @@ public class Renderer {
 		Thread thread = new Thread() {
 			public void run() {
 				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
-				VolatileImage vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
+				VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 				
 				while(true) {
 					totalFrames++;
@@ -76,22 +77,25 @@ public class Renderer {
 					}
 					
 					if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
-						vImage = gc.createCompatibleVolatileImage(gameWidth, gameHeight);
+						vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 					}
 					
 					Graphics g = vImage.getGraphics();
 					
 					g.setColor(Color.black);
-					g.fillRect(0, 0, gameWidth, gameHeight);
+					g.fillRect(0, 0, (int) gameWidth,(int)gameHeight);
+					
+					World.update();
+					World.render(g);
 					
 					g.setColor(Color.yellow);
 					g.setFont(new Font("Futura", Font.PLAIN, 8)); 
-					g.drawString(String.valueOf(currentFPS), gameWidth - 20, 10);
+					g.drawString(String.valueOf(currentFPS), (int) gameWidth - 20, 10);
 					
 					g.dispose();
 					
 					g = canvas.getGraphics();
-					g.drawImage(vImage, 0, 0, canvasWidth, canvasHeight, null);
+					g.drawImage(vImage, 0, 0, (int) canvasWidth, (int) canvasHeight, null);
 					g.dispose();
 				}
 			}
@@ -115,7 +119,7 @@ public class Renderer {
 		frame = new Frame();
 		canvas = new Canvas();
 		
-		canvas.setPreferredSize(new Dimension(canvasWidth, canvasHeight));
+		canvas.setPreferredSize(new Dimension( (int) canvasWidth, (int) canvasHeight));
 		frame.add(canvas);
 		makeFullscreen();
 		frame.pack();
