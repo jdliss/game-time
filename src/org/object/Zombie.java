@@ -49,9 +49,7 @@ public class Zombie extends Mob {
 		float distanceY = 0;
 		
 		distanceX = Math.abs(this.posX - playerX);
-	 
 		distanceY = Math.abs(this.posY - playerY);
-		
 		double alpha = Math.atan(distanceY / distanceX);
 		
 		yInc = runSpeed * Math.sin(alpha); 
