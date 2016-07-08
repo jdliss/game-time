@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.VolatileImage;
 
 import org.game.Game;
+import org.input.Input;
 import org.world.World;
 
 public class Renderer {
@@ -91,7 +92,6 @@ public class Renderer {
 					g.setColor(Color.yellow);
 					g.setFont(new Font("Futura", Font.PLAIN, 8)); 
 					g.drawString(String.valueOf(currentFPS), (int) gameWidth - 20, 10);
-					
 					g.dispose();
 					
 					g = canvas.getGraphics();
@@ -100,6 +100,7 @@ public class Renderer {
 				}
 			}
 		};
+		
 		thread.setName("rendering thread");
 		thread.start();
 	}
@@ -118,14 +119,14 @@ public class Renderer {
 		
 		frame = new Frame();
 		canvas = new Canvas();
-		
 		canvas.setPreferredSize(new Dimension( (int) canvasWidth, (int) canvasHeight));
 		frame.add(canvas);
+		
 		makeFullscreen();
+		
 		frame.pack();
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
-		
 		
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -134,7 +135,10 @@ public class Renderer {
 		});
 		
 		frame.setVisible(true);
+		canvas.addKeyListener(new Input());
+		
 		startRendering();
+		canvas.setFocusable(true);
 	}
 
 

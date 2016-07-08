@@ -2,8 +2,13 @@ package org.object;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+
+import org.input.Input;
 
 public class Player extends Mob {
+	
+	private float runSpeed = 30.0f;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -13,7 +18,22 @@ public class Player extends Mob {
 	}
 	
 	public void update(float deltaTime) {
-	 //
+		if (Input.getKey(KeyEvent.VK_W)) {
+			System.out.println("sfsdf");
+			moveY(-runSpeed * deltaTime);
+		}
+		
+		if (Input.getKey(KeyEvent.VK_S)) {
+			moveY(runSpeed * deltaTime);
+		}
+		
+		if (Input.getKey(KeyEvent.VK_A)) {
+			moveX(-runSpeed * deltaTime);
+		}
+		
+		if (Input.getKey(KeyEvent.VK_D)) {
+			moveX(runSpeed * deltaTime);
+		}
 	}
 	
 	public void render(Graphics g) {
