@@ -12,9 +12,9 @@ public class Sprite {
 	
 	public boolean isSolid = false;
 	
-	public Sprite(float posX, float posY) {
-		this.posX = posX;
-		this.posY = posY;
+	public Sprite(float a, float b) {
+		this.posX = a;
+		this.posY = b;
 	}
 
 	public void update(float deltaTime) {

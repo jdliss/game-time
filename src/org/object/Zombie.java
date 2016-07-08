@@ -7,7 +7,7 @@ import org.world.World;
 
 public class Zombie extends Mob {
 	
-	protected float runSpeed = 40.0f;
+	protected float runSpeed = 25.0f;
 
 	public Zombie(float posX, float posY) {
 		super(posX, posY);
@@ -17,28 +17,47 @@ public class Zombie extends Mob {
 	}
 	
 	public void update(float deltaTime) {
-		// goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
+		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
 	}
 	
 	public void render(Graphics g) {
 		g.setColor(Color.gray);
-		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), 10, 10);
-		g.drawLine((int) (posX - width / 2), (int) (posY - width / 2), (int)World.playerOne.posX, (int)World.playerOne.posY);
+		g.drawRect((int) (posX - width / 2), (int) (posY - height / 2), 10, 10);
 	}
 
 	public void goTo(float playerX, float playerY, float deltaTime) {
-		if (playerX < this.posX) {
-			posX -= runSpeed * deltaTime;
+		
+		float distanceX = 0;
+		float distanceY = 0;
+		
+	
+		distanceX = Math.abs(this.posX - playerX);
+	 
+		distanceY = Math.abs(this.posY - playerY);
+		
+		
+		System.out.println(distanceX);
+		System.out.println(distanceY);
+		
+		double alpha = Math.atan(distanceY / distanceX);
+		
+		double yInc = runSpeed * Math.sin(alpha); 
+		double xInc = runSpeed * Math.cos(alpha);
+	
+		if (this.posX > playerX) {
+			this.posX -= (xInc * deltaTime); 
 		} else {
-			posX += runSpeed * deltaTime;
+			this.posX += (xInc * deltaTime);
 		}
-				
-		if (playerY < this.posY) {
-			posY -= runSpeed * deltaTime;
+		
+		if (this.posY > playerY) {
+			this.posY -= (yInc * deltaTime);
 		} else {
-			posY += runSpeed * deltaTime;
+			this.posY += (yInc * deltaTime);
 		}
-				
+		
+		
 	}
 
 }
+

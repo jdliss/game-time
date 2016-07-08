@@ -35,46 +35,68 @@ public class ZombieTest {
 	}
 	
 	@Test
-	public void testMovesTowardPlayerPositive() {
-		Zombie zombie = new Zombie(100, 100);
-		Player player = new Player(20, 20);
-		
-		int newPosX = (int) (zombie.posX - zombie.runSpeed);
-		int newPosY = (int) (zombie.posY - zombie.runSpeed);
-		
-		zombie.goTo(player.posX, player.posY);
-		
-		assertEquals(newPosX, zombie.posX, 0);
-		assertEquals(newPosY, zombie.posY, 0);
-	}
-	
-	@Test
-	public void testMovesTowardPlayerNegative() {
+	public void testMovesToward45Degree() {
 		Zombie zombie = new Zombie(20, 20);
-		Player player = new Player(100, 100);
+		Player player = new Player(0, 0);
+				
+		zombie.goTo(player.posX, player.posY, 1);
 		
-		int newPosX = (int) (zombie.posX + zombie.runSpeed);
-		int newPosY = (int) (zombie.posY + zombie.runSpeed);
-		
-		zombie.goTo(player.posX, player.posY);
-		
-		assertEquals(newPosX, zombie.posX, 0);
-		assertEquals(newPosY, zombie.posY, 0);
+		assertEquals(0, zombie.posX, 0);
+		assertEquals(0, zombie.posY, 0);
 	}
 	
 	@Test
-	public void testMovesTowardPlayerMixed() {
-		Zombie zombie = new Zombie(20, 100);
-		Player player = new Player(100, 20);
+	public void testMovesToward30Degree() {
+		Zombie zombie = new Zombie((float) Math.sqrt(3), 1.0f);
+		Player player = new Player(0, 0);
+				
+		zombie.goTo(player.posX, player.posY, 1);
 		
-		int newPosX = (int) (zombie.posX + zombie.runSpeed);
-		int newPosY = (int) (zombie.posY - zombie.runSpeed);
-		
-		zombie.goTo(player.posX, player.posY);
-		
-		assertEquals(newPosX, zombie.posX, 0);
-		assertEquals(newPosY, zombie.posY, 0);
+		assertEquals(0, zombie.posX, 0);
+		assertEquals(0, zombie.posY, 0);
 	}
+	
+	
+	@Test
+	public void testMovesTowardWeirdDegree() {
+		Zombie zombie = new Zombie(60, 80);
+		Player player = new Player(200, 125);
+				
+		zombie.goTo(player.posX, player.posY, 1);
+		
+		assertEquals(0, zombie.posX, 0);
+		assertEquals(0, zombie.posY, 0);
+	}
+	
+}
+	
+//	@Test
+//	public void testMovesTowardPlayerNegative() {
+//		Zombie zombie = new Zombie(20, 20);
+//		Player player = new Player(100, 100);
+//		
+//		int newPosX = (int) (zombie.posX + zombie.runSpeed);
+//		int newPosY = (int) (zombie.posY + zombie.runSpeed);
+//		
+//		zombie.goTo(player.posX, player.posY);
+//		
+//		assertEquals(newPosX, zombie.posX, 0);
+//		assertEquals(newPosY, zombie.posY, 0);
+//	}
+//	
+//	@Test
+//	public void testMovesTowardPlayerMixed() {
+//		Zombie zombie = new Zombie(20, 100);
+//		Player player = new Player(100, 20);
+//		
+//		int newPosX = (int) (zombie.posX + zombie.runSpeed);
+//		int newPosY = (int) (zombie.posY - zombie.runSpeed);
+//		
+//		zombie.goTo(player.posX, player.posY);
+//		
+//		assertEquals(newPosX, zombie.posX, 0);
+//		assertEquals(newPosY, zombie.posY, 0);
+//	}
 	
 //	@Test
 //	public void testUpdatesPathToMoveTowardPlayer() {
@@ -89,4 +111,4 @@ public class ZombieTest {
 //		
 //	}
 
-}
+

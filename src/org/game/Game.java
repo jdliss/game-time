@@ -14,8 +14,8 @@ public class Game {
 		World.playerOne = new Player(200, 125);
 		World.currentWorld.sprites.add(World.playerOne);
 		World.currentWorld.sprites.add(new Zombie(20, 10));
-		World.currentWorld.sprites.add(new Zombie(40, 50));
-		World.currentWorld.sprites.add(new Zombie(60, 80));
+		World.currentWorld.sprites.add(new Zombie(0, 0));
+		World.currentWorld.sprites.add(new Zombie(10, 0));
 		World.currentWorld.sprites.add(new Zombie(80, 100));
 		World.currentWorld.sprites.add(new Zombie(100, 120));
 		World.currentWorld.sprites.add(new Zombie(120, 130));
@@ -24,6 +24,7 @@ public class Game {
 		World.currentWorld.sprites.add(new Zombie(180, 200));
 		World.currentWorld.sprites.add(new Zombie(200, 230));
 		World.currentWorld.sprites.add(new Zombie(220, 20));
+		World.currentWorld.sprites.add(new Zombie(100, 0));
 		
 	}
 	
