@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.world.World;
 
-public class Zombie extends Mob {
+public class ZombieY extends Mob {
 	
 	protected float runSpeed = 70.0f;
 	
@@ -14,7 +14,7 @@ public class Zombie extends Mob {
 	private double yInc = 0;
 	
 
-	public Zombie(float posX, float posY) {
+	public ZombieY(float posX, float posY) {
 		super(posX, posY);
 		
 		width = 10;
@@ -26,7 +26,7 @@ public class Zombie extends Mob {
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.gray);
+		g.setColor(Color.darkGray);
 		g.drawRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 	}
 
@@ -51,15 +51,15 @@ public class Zombie extends Mob {
 		float distanceY = 0;
 		
 		Random r = new Random();
-		int Low = -200;
-		int High = 200;
+		int Low = 0;
+		int High = 2;
 		
-		distanceX = Math.abs(this.posX - playerX + r.nextInt(High-Low) + Low);
-		distanceY = Math.abs(this.posY - playerY + r.nextInt(High-Low) + Low);
+		distanceX = Math.abs(this.posX - playerX);
+		distanceY = Math.abs(this.posY - playerY);
 		double alpha = Math.atan(distanceY / distanceX);
 		
-		xInc = runSpeed * Math.cos(alpha);
-		yInc = runSpeed * Math.sin(alpha); 
+		xInc = runSpeed * Math.cos(alpha - r.nextInt(High-Low) + Low);
+		yInc = runSpeed * Math.sin(alpha - r.nextInt(High-Low) + Low); 
 	}
 
 }
