@@ -32,4 +32,5 @@ public class Sprite {
 	public void moveY(double y) {
 		this.posY += y;
 	}
+	
 }
