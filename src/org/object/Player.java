@@ -1,7 +1,6 @@
 package org.object;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
@@ -11,7 +10,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
-import org.graphics.Renderer;
 import org.input.Click;
 import org.input.Input;
 import org.world.World;
@@ -19,6 +17,9 @@ import org.world.World;
 public class Player extends Mob {
 	
 	private float runSpeed = 80.0f;
+	private static double angle = 0;
+	private static double mouseX = 0;
+	private static double mouseY = 0;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -80,9 +81,21 @@ public class Player extends Mob {
 			}
 		}
 		
+		updateRotation(posX, posY);
 		
 		moveX(mX * deltaTime);
 		moveY(mY * deltaTime);
+	}
+	
+	private static void updateRotation(float posX, float posY){
+		int centerX = (int) posX;
+		int centerY = (int) posY;
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		
+		mouseX = findMouseX(p);
+		mouseY = findMouseY(p);
+		
+		angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
 	}
 	
 	
@@ -92,15 +105,7 @@ public class Player extends Mob {
 
 		g.setColor(Color.green);
 		
-		int centerX = (int) posX;
-		int centerY = (int) posY;
-		Point p = MouseInfo.getPointerInfo().getLocation();
-		
-		double mouseX = findMouseX(p);
-		double mouseY = findMouseY(p);
-		
-		double angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
-		g2d.rotate(angle, centerX, centerY);
+		g2d.rotate(angle, posX, posY);
 
 		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), (int)width, (int)height);
 		
