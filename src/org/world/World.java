@@ -2,8 +2,6 @@ package org.world;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-//import java.util.Iterator;
-//import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.object.Bullet;
 import org.object.Player;
