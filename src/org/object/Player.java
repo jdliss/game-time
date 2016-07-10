@@ -8,9 +8,11 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 
 import org.graphics.Renderer;
+import org.input.Click;
 import org.input.Input;
 import org.world.World;
 
@@ -50,6 +52,10 @@ public class Player extends Mob {
 			mX += runSpeed;
 		}
 		
+		if (Click.getButton(MouseEvent.BUTTON1)) {
+			
+		}
+		
 		Rectangle myRect = new Rectangle(
 				(int) (posX + mX * deltaTime - width / 2),
 				(int) (posY + mY * deltaTime - height / 2),
@@ -79,16 +85,8 @@ public class Player extends Mob {
 		moveY(mY * deltaTime);
 	}
 	
-	public void render(Graphics g) {
-		
-		Dimension screenSize = Renderer.getScreenSize();
-		
-		double screenWidth = screenSize.getWidth() - screenSize.getWidth() * 0.06;
-		double screenHeight = screenSize.getHeight() - screenSize.getHeight() * 0.06;
-		
-		double scaleX = Renderer.getGameWidth() / screenWidth;
-		double scaleY = Renderer.getGameHeight() / screenHeight;
-				
+	
+	public void render(Graphics g) {		
 		Graphics2D g2d = (Graphics2D) g;		
 		AffineTransform transform = g2d.getTransform();
 
@@ -96,12 +94,11 @@ public class Player extends Mob {
 		
 		int centerX = (int) posX;
 		int centerY = (int) posY;
-		
 		Point p = MouseInfo.getPointerInfo().getLocation();
 		
-		int mouseX = (int) (p.getX() * scaleX);
-		int mouseY = (int) (p.getY() * scaleY);
-	
+		double mouseX = findMouseX(p);
+		double mouseY = findMouseY(p);
+		
 		double angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
 		g2d.rotate(angle, centerX, centerY);
 

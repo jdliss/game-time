@@ -1,5 +1,7 @@
 package org.game;
 
+import java.awt.Dimension;
+
 import org.graphics.Renderer;
 import org.object.Player;
 import org.object.Zombie;
@@ -56,7 +58,10 @@ public class Game {
 		
 	}
 	
+	
+	
 	public static void quit() {
 		System.exit(0);
 	}
+
 }
