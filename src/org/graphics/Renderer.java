@@ -36,26 +36,36 @@ public class Renderer {
 	private static int currentFPS = 0;
 	private static int totalFrames = 0;
 	
-	private static void getBestSize()  {
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		
-		Dimension screenSize = toolkit.getScreenSize();
-		
+	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+	
+	public static Dimension getScreenSize() {
+		return SCREEN_SIZE;
+	}
+
+	public static int getGameWidth() {
+		return GAME_WIDTH;
+	}
+
+	public static int getGameHeight() {
+		return GAME_HEIGHT;
+	}
+
+	private static void getBestSize()  {		
 		boolean done = false;
 		while(!done) {
-			canvasWidth += GAME_WIDTH;
-			canvasHeight += GAME_HEIGHT;
-			if(canvasWidth > screenSize.width || canvasHeight > screenSize.height) {
-				canvasWidth -= GAME_WIDTH;
-				canvasHeight -= GAME_HEIGHT;
+			canvasWidth += getGameWidth();
+			canvasHeight += getGameHeight();
+			if(canvasWidth > SCREEN_SIZE.width || canvasHeight > SCREEN_SIZE.height) {
+				canvasWidth -= getGameWidth();
+				canvasHeight -= getGameHeight();
 				gameHeight = canvasHeight;
 				gameWidth = canvasWidth;
 				done = true;
 			}
 		}
-		float xDiff = screenSize.width - canvasWidth;
-		float yDiff = screenSize.height - canvasHeight;
-		float factor = canvasWidth / GAME_WIDTH;
+		float xDiff = SCREEN_SIZE.width - canvasWidth;
+		float yDiff = SCREEN_SIZE.height - canvasHeight;
+		float factor = canvasWidth / getGameWidth();
 		gameWidth = canvasWidth / factor + xDiff / factor;
 		gameHeight = canvasHeight / factor + yDiff / factor;
 		canvasWidth = gameWidth * factor;
