@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.util.Iterator;
 
 import org.input.Click;
 import org.input.Input;
@@ -63,7 +64,9 @@ public class Player extends Mob {
 				(int) width,
 				(int) height);
 		
-		for (Sprite sprite : World.currentWorld.sprites) {
+//		for (Sprite sprite : World.currentWorld.sprites) {
+		for (Iterator<Sprite> it = World.currentWorld.sprites.iterator(); it.hasNext();) {
+			Sprite sprite = it.next();
 			if (sprite == this) {
 				continue;
 			}
@@ -100,6 +103,7 @@ public class Player extends Mob {
 	
 	private void shoot(float posX, float posY){
 		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
+
 	}
 	public void render(Graphics g) {		
 		Graphics2D g2d = (Graphics2D) g;		

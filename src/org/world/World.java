@@ -2,6 +2,8 @@ package org.world;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+//import java.util.Iterator;
+//import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.object.Bullet;
 import org.object.Player;
@@ -25,7 +27,7 @@ public class World {
 			sprite.update(deltaTime);
 		}
 		
-		for (Sprite bullet : currentWorld.bullets) {
+		for (Bullet bullet : currentWorld.bullets) {
 			bullet.update(deltaTime);
 		}
 		
@@ -36,7 +38,7 @@ public class World {
 			sprite.render(g);
 		}
 		
-		for (Sprite bullet : currentWorld.bullets) {
+		for (Bullet bullet : currentWorld.bullets) {
 			bullet.render(g);
 		}
 	}
