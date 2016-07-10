@@ -12,18 +12,17 @@ public class Click implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	
+	public void mousePressed(MouseEvent e) {		
 		currentMouse[e.getButton()] = true;
 	}
 
 	
-	public void mousePressed(MouseEvent e) {
-	//
-		
-	}
-
-	
 	public void mouseReleased(MouseEvent e) {
-	//
+		currentMouse[e.getButton()] = false;
 		
 	}
 

@@ -54,7 +54,6 @@ public class Game {
 		World.currentWorld.sprites.add(new ZombieY(580, 320));
 		World.currentWorld.sprites.add(new Zombie(580, 340));
 		World.currentWorld.sprites.add(new Zombie(580, 346));
-
 		
 	}
 	

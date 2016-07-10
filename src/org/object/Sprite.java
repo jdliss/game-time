@@ -37,12 +37,10 @@ public class Sprite {
 	}
 	
 	protected static int findMouseX(Point p) {
-		System.out.println(Renderer.scaleX);
 		return (int) (p.getX() * Renderer.scaleX);
 	}
 	
 	protected static int findMouseY(Point p) {
-		System.out.println(Renderer.scaleY);
 		return (int) (p.getY() * Renderer.scaleY);
 	}
 	

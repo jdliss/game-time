@@ -54,7 +54,7 @@ public class Player extends Mob {
 		}
 		
 		if (Click.getButton(MouseEvent.BUTTON1)) {
-			
+			shoot(posX, posY);
 		}
 		
 		Rectangle myRect = new Rectangle(
@@ -87,7 +87,7 @@ public class Player extends Mob {
 		moveY(mY * deltaTime);
 	}
 	
-	private static void updateRotation(float posX, float posY){
+	private void updateRotation(float posX, float posY){
 		int centerX = (int) posX;
 		int centerY = (int) posY;
 		Point p = MouseInfo.getPointerInfo().getLocation();
@@ -98,7 +98,9 @@ public class Player extends Mob {
 		angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
 	}
 	
-	
+	private void shoot(float posX, float posY){
+		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
+	}
 	public void render(Graphics g) {		
 		Graphics2D g2d = (Graphics2D) g;		
 		AffineTransform transform = g2d.getTransform();
@@ -106,13 +108,10 @@ public class Player extends Mob {
 		g.setColor(Color.green);
 		
 		g2d.rotate(angle, posX, posY);
-
-		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), (int)width, (int)height);
-		
+		g.drawRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 		g2d.setTransform(transform);
 
-		g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
-		
+//		g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
 	}
 	
 }
