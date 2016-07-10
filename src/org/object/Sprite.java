@@ -1,6 +1,9 @@
 package org.object;
 
 import java.awt.Graphics;
+import java.awt.Point;
+
+import org.graphics.Renderer;
 
 public class Sprite {
 	
@@ -32,5 +35,15 @@ public class Sprite {
 	public void moveY(double y) {
 		this.posY += y;
 	}
+	
+	protected static int findMouseX(Point p) {
+		return (int) (p.getX() * Renderer.scaleX);
+	}
+	
+	protected static int findMouseY(Point p) {
+		return (int) (p.getY() * Renderer.scaleY);
+	}
+	
+	
 	
 }

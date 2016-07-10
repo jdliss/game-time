@@ -1,22 +1,26 @@
 package org.object;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
+import java.util.Iterator;
 
-import org.graphics.Renderer;
+import org.input.Click;
 import org.input.Input;
 import org.world.World;
 
 public class Player extends Mob {
 	
 	private float runSpeed = 80.0f;
+	private static double angle = 0;
+	private static double mouseX = 0;
+	private static double mouseY = 0;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -50,13 +54,19 @@ public class Player extends Mob {
 			mX += runSpeed;
 		}
 		
+		if (Click.getButton(MouseEvent.BUTTON1)) {
+			shoot(posX, posY);
+		}
+		
 		Rectangle myRect = new Rectangle(
 				(int) (posX + mX * deltaTime - width / 2),
 				(int) (posY + mY * deltaTime - height / 2),
 				(int) width,
 				(int) height);
 		
-		for (Sprite sprite : World.currentWorld.sprites) {
+//		for (Sprite sprite : World.currentWorld.sprites) {
+		for (Iterator<Sprite> it = World.currentWorld.sprites.iterator(); it.hasNext();) {
+			Sprite sprite = it.next();
 			if (sprite == this) {
 				continue;
 			}
@@ -74,43 +84,38 @@ public class Player extends Mob {
 			}
 		}
 		
+		updateRotation(posX, posY);
 		
 		moveX(mX * deltaTime);
 		moveY(mY * deltaTime);
 	}
 	
-	public void render(Graphics g) {
+	private void updateRotation(float posX, float posY){
+		int centerX = (int) posX;
+		int centerY = (int) posY;
+		Point p = MouseInfo.getPointerInfo().getLocation();
 		
-		Dimension screenSize = Renderer.getScreenSize();
+		mouseX = findMouseX(p);
+		mouseY = findMouseY(p);
 		
-		double screenWidth = screenSize.getWidth() - screenSize.getWidth() * 0.06;
-		double screenHeight = screenSize.getHeight() - screenSize.getHeight() * 0.06;
-		
-		double scaleX = Renderer.getGameWidth() / screenWidth;
-		double scaleY = Renderer.getGameHeight() / screenHeight;
-				
+		angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
+	}
+	
+	private void shoot(float posX, float posY){
+		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
+
+	}
+	public void render(Graphics g) {		
 		Graphics2D g2d = (Graphics2D) g;		
 		AffineTransform transform = g2d.getTransform();
 
 		g.setColor(Color.green);
 		
-		int centerX = (int) posX;
-		int centerY = (int) posY;
-		
-		Point p = MouseInfo.getPointerInfo().getLocation();
-		
-		int mouseX = (int) (p.getX() * scaleX);
-		int mouseY = (int) (p.getY() * scaleY);
-	
-		double angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
-		g2d.rotate(angle, centerX, centerY);
-
-		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), (int)width, (int)height);
-		
+		g2d.rotate(angle, posX, posY);
+		g.drawRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 		g2d.setTransform(transform);
 
-		g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
-		
+//		g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
 	}
 	
 }

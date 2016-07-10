@@ -15,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.VolatileImage;
 
 import org.game.Game;
+import org.input.Click;
 import org.input.Input;
 import org.world.World;
 
@@ -35,29 +36,20 @@ public class Renderer {
 	private static long lastFpsCheck = 0;
 	private static int currentFPS = 0;
 	private static int totalFrames = 0;
-	
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
-	
-	public static Dimension getScreenSize() {
-		return SCREEN_SIZE;
-	}
-
-	public static int getGameWidth() {
-		return GAME_WIDTH;
-	}
-
-	public static int getGameHeight() {
-		return GAME_HEIGHT;
-	}
+		
+	public static double scaleX =  0;  
+	public static double scaleY =  0;
+		
 
 	private static void getBestSize()  {		
 		boolean done = false;
 		while(!done) {
-			canvasWidth += getGameWidth();
-			canvasHeight += getGameHeight();
+			canvasWidth += GAME_WIDTH;
+			canvasHeight += GAME_HEIGHT;
 			if(canvasWidth > SCREEN_SIZE.width || canvasHeight > SCREEN_SIZE.height) {
-				canvasWidth -= getGameWidth();
-				canvasHeight -= getGameHeight();
+				canvasWidth -= GAME_WIDTH;
+				canvasHeight -= GAME_HEIGHT;
 				gameHeight = canvasHeight;
 				gameWidth = canvasWidth;
 				done = true;
@@ -65,11 +57,13 @@ public class Renderer {
 		}
 		float xDiff = SCREEN_SIZE.width - canvasWidth;
 		float yDiff = SCREEN_SIZE.height - canvasHeight;
-		float factor = canvasWidth / getGameWidth();
+		float factor = canvasWidth / GAME_WIDTH;
 		gameWidth = canvasWidth / factor + xDiff / factor;
 		gameHeight = canvasHeight / factor + yDiff / factor;
 		canvasWidth = gameWidth * factor;
 		canvasHeight = gameHeight * factor;
+		scaleX = GAME_WIDTH / (SCREEN_SIZE.getWidth() - (SCREEN_SIZE.getWidth() * 0.06));
+		scaleY =GAME_HEIGHT / (SCREEN_SIZE.getHeight() - (SCREEN_SIZE.getHeight() * 0.06));
 	}	
 	
 	private static void startRendering() {
@@ -147,6 +141,7 @@ public class Renderer {
 		
 		frame.setVisible(true);
 		canvas.addKeyListener(new Input());
+		canvas.addMouseListener(new Click());
 		
 		canvas.requestFocusInWindow();
 
