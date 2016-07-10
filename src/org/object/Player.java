@@ -1,10 +1,16 @@
 package org.object;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.geom.AffineTransform;
 
+import org.graphics.Renderer;
 import org.input.Input;
 import org.world.World;
 
@@ -74,8 +80,37 @@ public class Player extends Mob {
 	}
 	
 	public void render(Graphics g) {
+		
+		Dimension screenSize = Renderer.getScreenSize();
+		
+		double screenWidth = screenSize.getWidth() - screenSize.getWidth() * 0.06;
+		double screenHeight = screenSize.getHeight() - screenSize.getHeight() * 0.06;
+		
+		double scaleX = Renderer.getGameWidth() / screenWidth;
+		double scaleY = Renderer.getGameHeight() / screenHeight;
+				
+		Graphics2D g2d = (Graphics2D) g;		
+		AffineTransform transform = g2d.getTransform();
+
 		g.setColor(Color.green);
+		
+		int centerX = (int) posX;
+		int centerY = (int) posY;
+		
+		Point p = MouseInfo.getPointerInfo().getLocation();
+		
+		int mouseX = (int) (p.getX() * scaleX);
+		int mouseY = (int) (p.getY() * scaleY);
+	
+		double angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
+		g2d.rotate(angle, centerX, centerY);
+
 		g.drawRect((int) (posX - width / 2), (int) (posY - width / 2), (int)width, (int)height);
+		
+		g2d.setTransform(transform);
+
+		g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
+		
 	}
 	
 }
