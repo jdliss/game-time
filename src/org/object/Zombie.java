@@ -1,10 +1,7 @@
 package org.object;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
-
-import org.world.World;
 
 public abstract class Zombie extends Mob {
 		
@@ -16,17 +13,12 @@ public abstract class Zombie extends Mob {
 		super(posX, posY);
 	}
 	
-	public void update(float deltaTime) {
-		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
-	}
+	public abstract void update(float deltaTime);
 	
-	public void render(Graphics g) {
-		g.setColor(Color.MAGENTA);
-		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
-	}
+	public abstract void render(Graphics g);
 
 	public void goTo(float playerX, float playerY, float deltaTime) {
-		calculateInc(playerX, playerY);
+		calculateNormalInc(playerX, playerY);
 		
 		if (this.posX > playerX) {
 			moveX(-xInc * deltaTime); 
@@ -41,26 +33,25 @@ public abstract class Zombie extends Mob {
 		}
 	}
 	
-	private void calculateInc(float playerX, float playerY) {
-		float distanceX = 0;
-		float distanceY = 0;
+	private void calculateNormalInc(float playerX, float playerY) {
+		float distanceX = calculateDist(this.posX, playerX);
+		float distanceY = calculateDist(this.posY, playerY);
 		
-//		distanceX = Math.abs(this.posX - playerX + r.nextInt(high-low) + low);
-		distanceX = calculateDist(this.posX, playerX);
-//		distanceY = Math.abs(this.posY - playerY + r.nextInt(high-low) + low);
-		distanceY = calculateDist(this.posY, playerY);
-		double alpha = Math.atan(distanceY / distanceX);
+		double alpha = calculateAlpha(distanceX, distanceY);
 		
 		xInc = RUNSPEED * Math.cos(alpha);
 		yInc = RUNSPEED * Math.sin(alpha); 
 	}
 	
+	private double calculateAlpha(float distX, float distY) {
+		return Math.atan(distX / distY);
+	}
+	
 	private float calculateDist(float thisCoord, float playerCoord) {
 		Random r = new Random();
-		int low = -200;
-		int high = 200;
+		int randomInt = r.nextInt(200 - -200) + -200;
 		
-		return Math.abs(thisCoord - playerCoord + r.nextInt(high-low) + low);
+		return Math.abs(thisCoord - playerCoord + randomInt);
 	}
 
 }
