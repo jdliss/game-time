@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import org.world.World;
 
-public class Bullet extends Mob {
+public class Bullet extends Sprite {
 	protected final float RUNSPEED = 250.0f;
 	
 	private double xInc = 0;
@@ -23,7 +23,6 @@ public class Bullet extends Mob {
 		width = 2;
 		height = 2;
 	}
-
 	
 	public void update(float deltaTime) {
 		travel(deltaTime);
@@ -66,7 +65,6 @@ public class Bullet extends Mob {
 		moveY(mY * deltaTime);
 	}
 	
-	 
 	private void calculateInc() {
 		xInc = RUNSPEED * Math.sin(angle);
 		yInc = RUNSPEED * Math.cos(angle); 

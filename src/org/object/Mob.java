@@ -1,6 +1,6 @@
 package org.object;
 
-public class Mob extends Sprite {
+public abstract class Mob extends Sprite {
 	
 	protected final float RUNSPEED = 70.0f;
 
