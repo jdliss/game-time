@@ -16,3 +16,24 @@ We're using only native Java libraries, the primary one being Java AWT (Abstract
 
 * run the `.jar` file: `$ open game.jar`
 
+#### To Build
+
+* open Project In Eclipse
+
+* click `project` on toolbar - make sure build automatically is de-selected
+
+* click-on `clean..`
+
+* select `clean projects selected below`
+
+* select GameTime from list of projects 
+
+* deselect `start build immedietely`
+
+* click OK
+
+* Select `project` from tool bar and click `build project`
+
+
+
+
