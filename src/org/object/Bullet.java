@@ -30,7 +30,7 @@ public class Bullet extends Sprite {
 	
 	public void render(Graphics g) {
 		g.setColor(Color.red);
-		g.drawRoundRect((int) posX, (int) posY, (int) width, (int) height, 5, 5);
+		g.fillRoundRect((int) posX, (int) posY, (int) width, (int) height, 5, 5);
 	}
 	
 	public void travel(float deltaTime) {
@@ -50,6 +50,7 @@ public class Bullet extends Sprite {
 				if (sprite == World.playerOne || sprite == this) {
 					continue;
 				}
+				
 				Rectangle otherRect = new Rectangle(
 						(int) (sprite.posX + mX * deltaTime - width / 2),
 						(int) (sprite.posY + mY * deltaTime - height / 2),
