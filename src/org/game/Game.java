@@ -10,8 +10,6 @@ import org.world.World;
 public class Game {
 
 	public static void main(String[] args) {
-		Renderer.init();
-
 		World.currentWorld = new World();
 		World.playerOne = new Player(200, 125);
 		World.currentWorld.sprites.add(World.playerOne);
@@ -53,6 +51,7 @@ public class Game {
 		World.currentWorld.sprites.add(new Zombie(580, 340));
 		World.currentWorld.sprites.add(new Zombie(580, 346));
 		
+		Renderer.init();
 	}
 	
 	
