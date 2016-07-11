@@ -8,7 +8,7 @@ public class ZombieTest {
 
 	@Test
 	public void testHasPosition() {
-		Zombie zombie = new Zombie(100, 100);
+		Zombie zombie = new ZombieNormal(100, 100);
 		
 		assertEquals(100, zombie.posX, 0);
 		assertEquals(100, zombie.posY, 0);
@@ -16,7 +16,7 @@ public class ZombieTest {
 	
 	@Test
 	public void testMovesToward45Degree() {
-		Zombie zombie = new Zombie(20, 20);
+		Zombie zombie = new ZombieNormal(20, 20);
 		Player player = new Player(0, 0);
 				
 		zombie.goTo(player.posX, player.posY, 1);
@@ -27,7 +27,7 @@ public class ZombieTest {
 	
 	@Test
 	public void testMovesToward30Degree() {
-		Zombie zombie = new Zombie((float) Math.sqrt(3), 1.0f);
+		Zombie zombie = new ZombieNormal((float) Math.sqrt(3), 1.0f);
 		Player player = new Player(0, 0);
 				
 		zombie.goTo(player.posX, player.posY, 1);
@@ -39,7 +39,7 @@ public class ZombieTest {
 	
 	@Test
 	public void testMovesTowardWeirdDegree() {
-		Zombie zombie = new Zombie(60, 80);
+		Zombie zombie = new ZombieNormal(60, 80);
 		Player player = new Player(200, 125);
 				
 		zombie.goTo(player.posX, player.posY, 1);

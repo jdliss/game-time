@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.world.World;
 
-public class ZombieY extends Mob {
+public class ZombieY extends Zombie {
 		
 	private double xInc = 0;
 	private double yInc = 0;

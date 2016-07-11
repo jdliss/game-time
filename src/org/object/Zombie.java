@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.world.World;
 
-public class Zombie extends Mob {
+public abstract class Zombie extends Mob {
 		
 	private double xInc = 0;
 	private double yInc = 0;
@@ -14,9 +14,6 @@ public class Zombie extends Mob {
 
 	public Zombie(float posX, float posY) {
 		super(posX, posY);
-		
-		width = 10;
-		height = 10;
 	}
 	
 	public void update(float deltaTime) {
@@ -48,16 +45,22 @@ public class Zombie extends Mob {
 		float distanceX = 0;
 		float distanceY = 0;
 		
-		Random r = new Random();
-		int low = -200;
-		int high = 200;
-		
-		distanceX = Math.abs(this.posX - playerX + r.nextInt(high-low) + low);
-		distanceY = Math.abs(this.posY - playerY + r.nextInt(high-low) + low);
+//		distanceX = Math.abs(this.posX - playerX + r.nextInt(high-low) + low);
+		distanceX = calculateDist(this.posX, playerX);
+//		distanceY = Math.abs(this.posY - playerY + r.nextInt(high-low) + low);
+		distanceY = calculateDist(this.posY, playerY);
 		double alpha = Math.atan(distanceY / distanceX);
 		
 		xInc = RUNSPEED * Math.cos(alpha);
 		yInc = RUNSPEED * Math.sin(alpha); 
+	}
+	
+	private float calculateDist(float thisCoord, float playerCoord) {
+		Random r = new Random();
+		int low = -200;
+		int high = 200;
+		
+		return Math.abs(thisCoord - playerCoord + r.nextInt(high-low) + low);
 	}
 
 }
