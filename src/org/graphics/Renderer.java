@@ -20,7 +20,7 @@ import org.input.Input;
 import org.world.World;
 
 public class Renderer {
-
+	
 	private static Frame frame;
 	private static Canvas canvas;
 	
@@ -38,9 +38,8 @@ public class Renderer {
 	private static int totalFrames = 0;
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 		
-	public static double scaleX =  0;  
-	public static double scaleY =  0;
-		
+	public static double scaleX = 0;  
+	public static double scaleY = 0;
 
 	private static void getBestSize()  {		
 		boolean done = false;
@@ -55,6 +54,7 @@ public class Renderer {
 				done = true;
 			}
 		}
+		
 		float xDiff = SCREEN_SIZE.width - canvasWidth;
 		float yDiff = SCREEN_SIZE.height - canvasHeight;
 		float factor = canvasWidth / GAME_WIDTH;
@@ -72,12 +72,11 @@ public class Renderer {
 				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
 				VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 				
-				boolean thing = true;
-				while(thing) {
+				while(true) {
 					totalFrames++;
-					
-					if (System.nanoTime() > lastFpsCheck + 1000000000) {
-						lastFpsCheck = System.nanoTime();
+					long nanoTime = System.nanoTime();
+					if (nanoTime > lastFpsCheck + 1000000000) {
+						lastFpsCheck = nanoTime;
 						currentFPS = totalFrames;
 						totalFrames = 0;
 					}
@@ -142,7 +141,6 @@ public class Renderer {
 		frame.setVisible(true);
 		canvas.addKeyListener(new Input());
 		canvas.addMouseListener(new Click());
-		
 		canvas.requestFocusInWindow();
 
 		startRendering();

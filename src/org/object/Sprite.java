@@ -5,13 +5,13 @@ import java.awt.Point;
 
 import org.graphics.Renderer;
 
-public class Sprite {
+public abstract class Sprite {
 	
-	public float posX = 0;
-	public float posY = 0;
+	protected float posX = 0;
+	protected float posY = 0;
 		
-	public float width = 0;
-	public float height = 0;
+	protected float width = 0;
+	protected float height = 0;
 	
 	public boolean isSolid = false;
 	
@@ -20,19 +20,15 @@ public class Sprite {
 		this.posY = b;
 	}
 
-	public void update(float deltaTime) {
-		//
-	}
+	public abstract void update(float deltaTime);
 	
-	public void render(Graphics g) {
-		//
-	}
+	public abstract void render(Graphics g);
 	
-	public void moveX(double x) {
+	protected void moveX(double x) {
 		this.posX += x;
 	}
 	
-	public void moveY(double y) {
+	protected void moveY(double y) {
 		this.posY += y;
 	}
 	

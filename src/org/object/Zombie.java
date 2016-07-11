@@ -7,9 +7,7 @@ import java.util.Random;
 import org.world.World;
 
 public class Zombie extends Mob {
-	
-	protected float runSpeed = 70.0f;
-	
+		
 	private double xInc = 0;
 	private double yInc = 0;
 	
@@ -51,15 +49,15 @@ public class Zombie extends Mob {
 		float distanceY = 0;
 		
 		Random r = new Random();
-		int Low = -200;
-		int High = 200;
+		int low = -200;
+		int high = 200;
 		
-		distanceX = Math.abs(this.posX - playerX + r.nextInt(High-Low) + Low);
-		distanceY = Math.abs(this.posY - playerY + r.nextInt(High-Low) + Low);
+		distanceX = Math.abs(this.posX - playerX + r.nextInt(high-low) + low);
+		distanceY = Math.abs(this.posY - playerY + r.nextInt(high-low) + low);
 		double alpha = Math.atan(distanceY / distanceX);
 		
-		xInc = runSpeed * Math.cos(alpha);
-		yInc = runSpeed * Math.sin(alpha); 
+		xInc = RUNSPEED * Math.cos(alpha);
+		yInc = RUNSPEED * Math.sin(alpha); 
 	}
 
 }
