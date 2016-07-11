@@ -17,7 +17,7 @@ import org.world.World;
 
 public class Player extends Mob {
 	
-	private float runSpeed = 80.0f;
+	private final float RUNSPEED = 80.0f;
 	private static double angle = 0;
 	private static double mouseX = 0;
 	private static double mouseY = 0;
@@ -39,19 +39,19 @@ public class Player extends Mob {
 		float mY = 0;
 		
 		if (Input.getKey(KeyEvent.VK_W)) {
-			mY -= runSpeed;
+			mY -= RUNSPEED;
 		}
 		
 		if (Input.getKey(KeyEvent.VK_S)) {
-			mY += runSpeed;
+			mY += RUNSPEED;
 		}
 		
 		if (Input.getKey(KeyEvent.VK_A)) {
-			mX -= runSpeed;
+			mX -= RUNSPEED;
 		}
 		
 		if (Input.getKey(KeyEvent.VK_D)) {
-			mX += runSpeed;
+			mX += RUNSPEED;
 		}
 		
 		if (Click.getButton(MouseEvent.BUTTON1)) {
