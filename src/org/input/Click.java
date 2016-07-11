@@ -8,13 +8,10 @@ public class Click implements MouseListener {
 	private static boolean[] currentMouse = new boolean[32];
 	
 	public static boolean getButton(int mouseButton) {
-		return currentMouse[mouseButton];
+		boolean bool = currentMouse[mouseButton];
+		currentMouse[mouseButton] = false;
+		return bool;
 	}
-
-	public void mouseClicked(MouseEvent e) {
-
-	}
-
 	
 	public void mousePressed(MouseEvent e) {		
 		currentMouse[e.getButton()] = true;
@@ -22,19 +19,21 @@ public class Click implements MouseListener {
 
 	
 	public void mouseReleased(MouseEvent e) {
-		currentMouse[e.getButton()] = false;
-		
+		//
 	}
 
-	
-	public void mouseEntered(MouseEvent e) {
-	//
+	public void mouseClicked(MouseEvent e) {
+		//
+	}
+
 		
+	public void mouseEntered(MouseEvent e) {
+		//
 	}
 
 	
 	public void mouseExited(MouseEvent e) {
-	//
+		//
 	}
 
 }
