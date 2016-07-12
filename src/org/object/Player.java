@@ -107,7 +107,7 @@ public class Player extends Mob {
 		g.setColor(Color.green);
 
 		g2d.rotate(angle, posX, posY);
-		g.drawRect((int) (posX - width / 2), (int) (posY - height / 2), (int) width, (int) height);
+		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int) width, (int) height);
 		g2d.setTransform(transform);
 
 		// g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);

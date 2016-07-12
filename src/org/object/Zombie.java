@@ -1,12 +1,9 @@
 package org.object;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import org.world.World;
-
-public class Zombie extends Mob {
+public abstract class Zombie extends Mob {
 		
 	private double xInc = 0;
 	private double yInc = 0;
@@ -14,23 +11,25 @@ public class Zombie extends Mob {
 
 	public Zombie(float posX, float posY) {
 		super(posX, posY);
-		
-		width = 10;
-		height = 10;
 	}
 	
-	public void update(float deltaTime) {
-		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
-	}
+	public abstract void update(float deltaTime);
 	
-	public void render(Graphics g) {
-		g.setColor(Color.MAGENTA);
-		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
-	}
+	public abstract void render(Graphics g);
 
-	public void goTo(float playerX, float playerY, float deltaTime) {
-		calculateInc(playerX, playerY);
+	public void goTo(float playerX, float playerY, float deltaTime, String zombieVersion) {
+		if (zombieVersion == "Normal") {
+			calculateIncNormal(playerX, playerY);
+		} else if (zombieVersion == "X") {
+			calculateIncXandY(playerX, playerY, "X");
+		} else {
+			calculateIncXandY(playerX, playerY, "Y");
+		}
 		
+		moveZombie(playerX, playerY, deltaTime);
+	}
+	
+	private void moveZombie(float playerX, float playerY, float deltaTime) {
 		if (this.posX > playerX) {
 			moveX(-xInc * deltaTime); 
 		} else {
@@ -44,20 +43,47 @@ public class Zombie extends Mob {
 		}
 	}
 	
-	private void calculateInc(float playerX, float playerY) {
-		float distanceX = 0;
-		float distanceY = 0;
+	private void calculateIncXandY(float playerX, float playerY, String zombieType) {
+		float distanceX = calculateDist(this.posX, playerX, false);
+		float distanceY = calculateDist(this.posY, playerY, false);
+		double alpha = calculateAlpha(distanceX, distanceY);
 		
 		Random r = new Random();
-		int low = -200;
-		int high = 200;
+		int randomInt = r.nextInt(2);
 		
-		distanceX = Math.abs(this.posX - playerX + r.nextInt(high-low) + low);
-		distanceY = Math.abs(this.posY - playerY + r.nextInt(high-low) + low);
-		double alpha = Math.atan(distanceY / distanceX);
+		if (zombieType == "X") {
+			setIncrements(alpha + randomInt);
+		} else {
+			setIncrements(alpha - randomInt);
+		}
+	}
+	
+	private void calculateIncNormal(float playerX, float playerY) {
+		float distanceX = calculateDist(this.posX, playerX, true);
+		float distanceY = calculateDist(this.posY, playerY, true);
 		
+		double alpha = calculateAlpha(distanceX, distanceY);
+		
+		setIncrements(alpha);
+	}
+	
+	private void setIncrements(double alpha) {
 		xInc = RUNSPEED * Math.cos(alpha);
-		yInc = RUNSPEED * Math.sin(alpha); 
+		yInc = RUNSPEED * Math.sin(alpha);
+	}
+	
+	private double calculateAlpha(float distX, float distY) {
+		return Math.atan(distY / distX);
+	}
+	
+	private float calculateDist(float thisCoord, float playerCoord, boolean needsRandom) {
+		int randomInt = 0;
+		if (needsRandom) {
+			Random r = new Random();
+			randomInt = r.nextInt(400) + -200;			
+		}
+		
+		return Math.abs(thisCoord - playerCoord + randomInt);
 	}
 
 }

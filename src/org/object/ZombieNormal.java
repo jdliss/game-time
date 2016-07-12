@@ -5,9 +5,9 @@ import java.awt.Graphics;
 
 import org.world.World;
 
-public class ZombieX extends Zombie {
+public class ZombieNormal extends Zombie {
 
-	public ZombieX(float posX, float posY) {
+	public ZombieNormal(float posX, float posY) {
 		super(posX, posY);
 		
 		width = 10;
@@ -15,7 +15,7 @@ public class ZombieX extends Zombie {
 	}
 	
 	public void update(float deltaTime) {
-		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "X");
+		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "Normal");
 	}
 	
 	public void render(Graphics g) {
