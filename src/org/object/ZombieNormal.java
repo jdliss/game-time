@@ -15,7 +15,7 @@ public class ZombieNormal extends Zombie {
 	}
 	
 	public void update(float deltaTime) {
-		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime);
+		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "Normal");
 	}
 	
 	public void render(Graphics g) {

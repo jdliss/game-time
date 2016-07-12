@@ -19,7 +19,7 @@ public class ZombieTest {
 		Zombie zombie = new ZombieNormal(20, 20);
 		Player player = new Player(0, 0);
 				
-		zombie.goTo(player.posX, player.posY, 1);
+		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
 		assertEquals(2, zombie.posX, 1);
 		assertEquals(2, zombie.posY, 1);
@@ -30,7 +30,7 @@ public class ZombieTest {
 		Zombie zombie = new ZombieNormal((float) Math.sqrt(3), 1.0f);
 		Player player = new Player(0, 0);
 				
-		zombie.goTo(player.posX, player.posY, 1);
+		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
 		assertEquals(-19.5, zombie.posX, 1);
 		assertEquals(-11.5, zombie.posY, 1);
@@ -42,7 +42,7 @@ public class ZombieTest {
 		Zombie zombie = new ZombieNormal(60, 80);
 		Player player = new Player(200, 125);
 				
-		zombie.goTo(player.posX, player.posY, 1);
+		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
 		assertEquals(83, zombie.posX, 1);
 		assertEquals(87, zombie.posY, 1);

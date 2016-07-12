@@ -17,9 +17,19 @@ public abstract class Zombie extends Mob {
 	
 	public abstract void render(Graphics g);
 
-	public void goTo(float playerX, float playerY, float deltaTime) {
-		calculateNormalInc(playerX, playerY);
+	public void goTo(float playerX, float playerY, float deltaTime, String zombieVersion) {
+		if (zombieVersion == "Normal") {
+			calculateIncNormal(playerX, playerY);
+		} else if (zombieVersion == "X") {
+			calculateIncXandY(playerX, playerY, "X");
+		} else {
+			calculateIncXandY(playerX, playerY, "Y");
+		}
 		
+		moveZombie(playerX, playerY, deltaTime);
+	}
+	
+	private void moveZombie(float playerX, float playerY, float deltaTime) {
 		if (this.posX > playerX) {
 			moveX(-xInc * deltaTime); 
 		} else {
@@ -33,23 +43,45 @@ public abstract class Zombie extends Mob {
 		}
 	}
 	
-	private void calculateNormalInc(float playerX, float playerY) {
-		float distanceX = calculateDist(this.posX, playerX);
-		float distanceY = calculateDist(this.posY, playerY);
+	private void calculateIncXandY(float playerX, float playerY, String zombieType) {
+		float distanceX = calculateDist(this.posX, playerX, false);
+		float distanceY = calculateDist(this.posY, playerY, false);
+		double alpha = calculateAlpha(distanceX, distanceY);
+		
+		Random r = new Random();
+		int randomInt = r.nextInt(2);
+		
+		if (zombieType == "X") {
+			setIncrements(alpha + randomInt);
+		} else {
+			setIncrements(alpha - randomInt);
+		}
+	}
+	
+	private void calculateIncNormal(float playerX, float playerY) {
+		float distanceX = calculateDist(this.posX, playerX, true);
+		float distanceY = calculateDist(this.posY, playerY, true);
 		
 		double alpha = calculateAlpha(distanceX, distanceY);
 		
+		setIncrements(alpha);
+	}
+	
+	private void setIncrements(double alpha) {
 		xInc = RUNSPEED * Math.cos(alpha);
-		yInc = RUNSPEED * Math.sin(alpha); 
+		yInc = RUNSPEED * Math.sin(alpha);
 	}
 	
 	private double calculateAlpha(float distX, float distY) {
-		return Math.atan(distX / distY);
+		return Math.atan(distY / distX);
 	}
 	
-	private float calculateDist(float thisCoord, float playerCoord) {
-		Random r = new Random();
-		int randomInt = r.nextInt(200 - -200) + -200;
+	private float calculateDist(float thisCoord, float playerCoord, boolean needsRandom) {
+		int randomInt = 0;
+		if (needsRandom) {
+			Random r = new Random();
+			randomInt = r.nextInt(400) + -200;			
+		}
 		
 		return Math.abs(thisCoord - playerCoord + randomInt);
 	}
