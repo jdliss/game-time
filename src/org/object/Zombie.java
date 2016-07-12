@@ -1,7 +1,11 @@
 package org.object;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.util.Iterator;
 import java.util.Random;
+
+import org.world.World;
 
 public abstract class Zombie extends Mob {
 		
@@ -25,22 +29,49 @@ public abstract class Zombie extends Mob {
 		} else {
 			calculateIncXandY(playerX, playerY, "Y");
 		}
-		
 		moveZombie(playerX, playerY, deltaTime);
 	}
 	
 	private void moveZombie(float playerX, float playerY, float deltaTime) {
+		double mX = 0;
+		double mY = 0;
+				
+				
 		if (this.posX > playerX) {
-			moveX(-xInc * deltaTime); 
+			mX = -xInc * deltaTime;
 		} else {
-			moveX(xInc * deltaTime);
+			mX = xInc * deltaTime;
+			
 		}
 		
 		if (this.posY > playerY) {
-			moveY(-yInc * deltaTime);
+			mY = -yInc * deltaTime;			
 		} else {
-			moveY(yInc * deltaTime);
+			mY = yInc * deltaTime;
 		}
+		
+//		Rectangle myRect = new Rectangle(
+//				(int) (posX + mX * deltaTime - width / 2),
+//				(int) (posY + mY * deltaTime - height / 2),
+//				(int) width,
+//				(int) height);
+//			
+//			for (Iterator<Bullet> it = World.currentWorld.bullets.iterator(); it.hasNext();){
+//				Bullet bullet = it.next();
+//				
+//				Rectangle otherRect = new Rectangle(
+//						(int) (bullet.posX + mX * deltaTime - width / 2),
+//						(int) (bullet.posY + mY * deltaTime - height / 2),
+//						(int) bullet.width,
+//						(int) bullet.height);
+//			
+//				if (myRect.intersects(otherRect)) {
+//					it.remove();
+//				}
+//			}
+		
+		moveX(mX);
+		moveY(mY);
 	}
 	
 	private void calculateIncXandY(float playerX, float playerY, String zombieType) {

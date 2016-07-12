@@ -67,8 +67,7 @@ public class Renderer {
 	}	
 	
 	private static void startRendering() {
-		Thread thread = new Thread() {
-			public void run() {
+//			public void run() {
 				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
 				VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 				
@@ -103,11 +102,6 @@ public class Renderer {
 					g.dispose();
 				}
 			}
-		};
-		
-		thread.setName("rendering thread");
-		thread.start();
-	}
 	
 	private static void makeFullscreen() {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();

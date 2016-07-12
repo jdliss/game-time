@@ -13,15 +13,17 @@ public class Bullet extends Sprite {
 	private double xInc = 0;
 	private double yInc = 0;
 	private double angle = 0;
+	public boolean remove = false;
 	
 	public Bullet(float playerX, float playerY, double angle2) {
 		super(playerX, playerY);
 		this.angle = angle2;
 		this.posX = playerX;
 		this.posY = playerY;
+
 		
-		width = 2;
-		height = 2;
+		width = 3;
+		height = 3;
 	}
 	
 	public void update(float deltaTime) {
@@ -59,6 +61,7 @@ public class Bullet extends Sprite {
 			
 				if (myRect.intersects(otherRect)) {
 					it.remove();
+					this.remove = true;
 				}
 			
 		}
