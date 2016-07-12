@@ -9,7 +9,7 @@ import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
 import org.object.ZombieNormal;
-import org.object.ZombieY;
+import org.object.ZombieAxis;
 
 public class World {
 	
@@ -51,28 +51,21 @@ public class World {
 		}
 	}
 	
-	public static void spawnZombie(int count) {
-		
+	public static void spawnZombie(int count) {		
 		for (int i = 0; i < count; i++) {
-			if (i % 2 == 0) {
-				Random r = new Random();
-				for (int j = 0; j < r.nextInt(3 - 1) + 1; j++) {
-					int x = r.nextInt(580 - 10) + 10;
-					int y = r.nextInt(350 - 10) + 10;
-					
-					World.currentWorld.sprites.add(new ZombieNormal(x, y));
+			Random r = new Random();
+			for (int j = 0; j < r.nextInt(3 - 1) + 1; j++) {
+				int x = r.nextInt(580 - 10) + 10;
+				int y = r.nextInt(350 - 10) + 10;
+				
+				if (j % 2 == 0) {
+					World.currentWorld.sprites.add(new ZombieNormal(x, y));	
+				} else {
+					World.currentWorld.sprites.add(new ZombieAxis(x, y));
 				}
 				
-			} else {
-				Random r = new Random();
-				for (int j = 0; j < r.nextInt(3 - 1) + 1; j++) {
-					int x = r.nextInt(580 - 10) + 10;
-					int y = r.nextInt(350 - 10) + 10;
-					
-					World.currentWorld.sprites.add(new ZombieY(x, y));
-				}
+				
 			}
 		}
-	}
-	
+	}	
 }
