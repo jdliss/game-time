@@ -2,10 +2,14 @@ package org.world;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
+import org.object.ZombieNormal;
+import org.object.ZombieX;
+import org.object.ZombieY;
 
 public class World {
 	
@@ -29,6 +33,11 @@ public class World {
 			bullet.update(deltaTime);
 		}
 		
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
+		currentWorld.bullets = bullets;
+		
+		
 	}
 	
 	public static void render(Graphics g) {
@@ -40,4 +49,13 @@ public class World {
 			bullet.render(g);
 		}
 	}
+	
+	public static void spawnZombie() {
+		
+		World.currentWorld.sprites.add(new ZombieNormal(10, 10));
+		World.currentWorld.sprites.add(new ZombieX(600, 0));
+		World.currentWorld.sprites.add(new ZombieY(0, 375));
+		World.currentWorld.sprites.add(new ZombieY(600, 375));
+	}
+	
 }
