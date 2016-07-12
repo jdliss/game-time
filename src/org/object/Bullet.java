@@ -62,6 +62,7 @@ public class Bullet extends Sprite {
 				if (myRect.intersects(otherRect)) {
 					it.remove();
 					this.remove = true;
+					World.playerOne.score += 10;
 				}
 			
 		}

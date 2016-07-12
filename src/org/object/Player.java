@@ -18,9 +18,13 @@ import org.world.World;
 public class Player extends Mob {
 
 	private final float RUNSPEED = 80.0f;
+	
 	private static double angle = 0;
+	
 	private static double mouseX = 0;
 	private static double mouseY = 0;
+	
+	public int score = 0;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -61,7 +65,6 @@ public class Player extends Mob {
 		Rectangle myRect = new Rectangle((int) (posX + mX * deltaTime - width / 2),
 				(int) (posY + mY * deltaTime - height / 2), (int) width, (int) height);
 
-		// for (Sprite sprite : World.currentWorld.sprites) {
 		for (Iterator<Sprite> it = World.currentWorld.sprites.iterator(); it.hasNext();) {
 			Sprite sprite = it.next();
 			if (sprite == this) {
@@ -110,7 +113,8 @@ public class Player extends Mob {
 		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int) width, (int) height);
 		g2d.setTransform(transform);
 
-		// g.drawLine((int)posX, (int)posY, (int) mouseX, (int) mouseY);
+		g.setColor(Color.green);
+		g.drawString("Score: " + String.valueOf(World.playerOne.score), 10, 20);
 	}
 
 }

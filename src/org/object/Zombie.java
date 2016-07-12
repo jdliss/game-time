@@ -1,11 +1,7 @@
 package org.object;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.Iterator;
 import java.util.Random;
-
-import org.world.World;
 
 public abstract class Zombie extends Mob {
 		
@@ -24,10 +20,8 @@ public abstract class Zombie extends Mob {
 	public void goTo(float playerX, float playerY, float deltaTime, String zombieVersion) {
 		if (zombieVersion == "Normal") {
 			calculateIncNormal(playerX, playerY);
-		} else if (zombieVersion == "X") {
-			calculateIncXandY(playerX, playerY, "X");
 		} else {
-			calculateIncXandY(playerX, playerY, "Y");
+			calculateIncXandY(playerX, playerY, "Axis");
 		}
 		moveZombie(playerX, playerY, deltaTime);
 	}
@@ -50,39 +44,19 @@ public abstract class Zombie extends Mob {
 			mY = yInc * deltaTime;
 		}
 		
-//		Rectangle myRect = new Rectangle(
-//				(int) (posX + mX * deltaTime - width / 2),
-//				(int) (posY + mY * deltaTime - height / 2),
-//				(int) width,
-//				(int) height);
-//			
-//			for (Iterator<Bullet> it = World.currentWorld.bullets.iterator(); it.hasNext();){
-//				Bullet bullet = it.next();
-//				
-//				Rectangle otherRect = new Rectangle(
-//						(int) (bullet.posX + mX * deltaTime - width / 2),
-//						(int) (bullet.posY + mY * deltaTime - height / 2),
-//						(int) bullet.width,
-//						(int) bullet.height);
-//			
-//				if (myRect.intersects(otherRect)) {
-//					it.remove();
-//				}
-//			}
-		
 		moveX(mX);
 		moveY(mY);
 	}
 	
 	private void calculateIncXandY(float playerX, float playerY, String zombieType) {
-		float distanceX = calculateDist(this.posX, playerX, false);
-		float distanceY = calculateDist(this.posY, playerY, false);
+		float distanceX = calculateDist(this.posX, playerX);
+		float distanceY = calculateDist(this.posY, playerY);
 		double alpha = calculateAlpha(distanceX, distanceY);
 		
 		Random r = new Random();
 		int randomInt = r.nextInt(2);
 		
-		if (zombieType == "X") {
+		if (zombieType == "Axis") {
 			setIncrements(alpha + randomInt);
 		} else {
 			setIncrements(alpha - randomInt);
@@ -90,8 +64,8 @@ public abstract class Zombie extends Mob {
 	}
 	
 	private void calculateIncNormal(float playerX, float playerY) {
-		float distanceX = calculateDist(this.posX, playerX, true);
-		float distanceY = calculateDist(this.posY, playerY, true);
+		float distanceX = calculateDist(this.posX, playerX);
+		float distanceY = calculateDist(this.posY, playerY);
 		
 		double alpha = calculateAlpha(distanceX, distanceY);
 		
@@ -107,14 +81,8 @@ public abstract class Zombie extends Mob {
 		return Math.atan(distY / distX);
 	}
 	
-	private float calculateDist(float thisCoord, float playerCoord, boolean needsRandom) {
-		int randomInt = 0;
-		if (needsRandom) {
-			Random r = new Random();
-			randomInt = r.nextInt(400) + -200;			
-		}
-		
-		return Math.abs(thisCoord - playerCoord + randomInt);
+	private float calculateDist(float thisCoord, float playerCoord) {
+		return Math.abs(thisCoord - playerCoord);
 	}
 
 }
