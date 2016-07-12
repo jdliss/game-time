@@ -2,13 +2,13 @@ package org.world;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
 import org.object.ZombieNormal;
-import org.object.ZombieX;
 import org.object.ZombieY;
 
 public class World {
@@ -35,9 +35,10 @@ public class World {
 		
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
+		int count = currentWorld.bullets.size() - bullets.size();
 		currentWorld.bullets = bullets;
 		
-		
+		spawnZombie(count);
 	}
 	
 	public static void render(Graphics g) {
@@ -50,12 +51,28 @@ public class World {
 		}
 	}
 	
-	public static void spawnZombie() {
+	public static void spawnZombie(int count) {
 		
-		World.currentWorld.sprites.add(new ZombieNormal(10, 10));
-		World.currentWorld.sprites.add(new ZombieX(600, 0));
-		World.currentWorld.sprites.add(new ZombieY(0, 375));
-		World.currentWorld.sprites.add(new ZombieY(600, 375));
+		for (int i = 0; i < count; i++) {
+			if (i % 2 == 0) {
+				Random r = new Random();
+				for (int j = 0; j < r.nextInt(3 - 1) + 1; j++) {
+					int x = r.nextInt(580 - 10) + 10;
+					int y = r.nextInt(350 - 10) + 10;
+					
+					World.currentWorld.sprites.add(new ZombieNormal(x, y));
+				}
+				
+			} else {
+				Random r = new Random();
+				for (int j = 0; j < r.nextInt(3 - 1) + 1; j++) {
+					int x = r.nextInt(580 - 10) + 10;
+					int y = r.nextInt(350 - 10) + 10;
+					
+					World.currentWorld.sprites.add(new ZombieY(x, y));
+				}
+			}
+		}
 	}
 	
 }

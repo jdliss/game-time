@@ -1,11 +1,7 @@
 package org.object;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.util.Iterator;
 import java.util.Random;
-
-import org.world.World;
 
 public abstract class Zombie extends Mob {
 		
@@ -49,26 +45,6 @@ public abstract class Zombie extends Mob {
 		} else {
 			mY = yInc * deltaTime;
 		}
-		
-//		Rectangle myRect = new Rectangle(
-//				(int) (posX + mX * deltaTime - width / 2),
-//				(int) (posY + mY * deltaTime - height / 2),
-//				(int) width,
-//				(int) height);
-//			
-//			for (Iterator<Bullet> it = World.currentWorld.bullets.iterator(); it.hasNext();){
-//				Bullet bullet = it.next();
-//				
-//				Rectangle otherRect = new Rectangle(
-//						(int) (bullet.posX + mX * deltaTime - width / 2),
-//						(int) (bullet.posY + mY * deltaTime - height / 2),
-//						(int) bullet.width,
-//						(int) bullet.height);
-//			
-//				if (myRect.intersects(otherRect)) {
-//					it.remove();
-//				}
-//			}
 		
 		moveX(mX);
 		moveY(mY);
