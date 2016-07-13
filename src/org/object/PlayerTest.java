@@ -3,6 +3,7 @@ package org.object;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.world.World;
 
 public class PlayerTest {
 
@@ -32,6 +33,21 @@ public class PlayerTest {
 		
 		assertEquals(100, player.posX, 0);
 		assertEquals(110, player.posY, 0);
+	}
+	
+	@Test
+	public void testPlayerCanShoot(){
+		Player player = new Player(100, 100);
+		World.currentWorld = new World();
+		
+		int bulletsFired = World.currentWorld.bullets.size();
+		
+		assertEquals(0, bulletsFired);
+		
+		player.shoot(player.posX, player.posY);
+		
+		assertEquals(1, World.currentWorld.bullets.size(), 0);
+	
 	}
 
 }

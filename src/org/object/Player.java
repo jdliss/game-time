@@ -17,7 +17,7 @@ import org.world.World;
 
 public class Player extends Mob {
 
-	private final float RUNSPEED = 95.0f;
+	private final float RUNSPEED = 90.0f;
 	
 	private static double angle = 0;
 	
@@ -98,7 +98,7 @@ public class Player extends Mob {
 		angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
 	}
 
-	private void shoot(float posX, float posY) {
+	void shoot(float posX, float posY) {
 		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
 
 	}
