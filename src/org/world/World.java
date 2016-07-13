@@ -58,16 +58,21 @@ public class World {
 	}
 	
 	public static void render(Graphics g) {
-		for (Sprite sprite : currentWorld.sprites) {
-			sprite.render(g);
-		}
-		
-		for (Bullet bullet : currentWorld.bullets) {
-			bullet.render(g);
-		}
-		
-		if (playerOne.isDead) {
-			Game.handlePlayerDeath(g);	
+		if (Game.started) {
+			for (Sprite sprite : currentWorld.sprites) {
+				sprite.render(g);
+			}
+			
+			for (Bullet bullet : currentWorld.bullets) {
+				bullet.render(g);
+			}
+			
+			if (playerOne.isDead) {
+				Game.handlePlayerDeath(g);	
+			}
+			
+		} else {
+			Game.startScreen(g);
 		}
 		
 	}

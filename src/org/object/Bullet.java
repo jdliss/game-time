@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import org.world.World;
 
 public class Bullet extends Sprite {
+	
 	protected final float RUNSPEED = 250.0f;
 	
 	private double xInc = 0;
