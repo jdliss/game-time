@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import org.world.World;
 
 public class ZombieNormal extends Zombie {
-
+	
 	public ZombieNormal(float posX, float posY) {
 		super(posX, posY);
 		

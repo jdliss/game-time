@@ -17,7 +17,7 @@ import org.world.World;
 
 public class Player extends Mob {
 
-	private final float RUNSPEED = 80.0f;
+	private final float RUNSPEED = 95.0f;
 	
 	private static double angle = 0;
 	

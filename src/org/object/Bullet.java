@@ -47,8 +47,7 @@ public class Bullet extends Sprite {
 				(int) width,
 				(int) height);
 			
-			for (Iterator<Sprite> it = World.currentWorld.sprites.iterator(); it.hasNext();){
-				Sprite sprite = it.next();
+			for (Sprite sprite : World.currentWorld.sprites) { 
 				if (sprite == World.playerOne || sprite == this) {
 					continue;
 				}
@@ -60,7 +59,10 @@ public class Bullet extends Sprite {
 						(int) sprite.height);
 			
 				if (myRect.intersects(otherRect)) {
-					it.remove();
+					sprite.health -= 1;
+					if (sprite.getClass().equals(ZombieFat.class) && sprite.health == 0) {
+						World.destroyZombies = true;
+					}
 					this.remove = true;
 					World.playerOne.score += 10;
 				}
