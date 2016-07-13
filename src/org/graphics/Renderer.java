@@ -6,9 +6,11 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -30,8 +32,8 @@ public class Renderer {
 	private static final int GAME_WIDTH = 600;
 	private static final int GAME_HEIGHT = 375;
 	
-	private static float gameHeight = 0;
-	private static float gameWidth = 0;
+	public static float gameHeight = 0;
+	public static float gameWidth = 0;
 	
 	private static long lastFpsCheck = 0;
 	private static int currentFPS = 0;
@@ -67,41 +69,42 @@ public class Renderer {
 	}	
 	
 	private static void startRendering() {
-//			public void run() {
-				GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
-				VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
-				
-				while(true) {
-					totalFrames++;
-					long nanoTime = System.nanoTime();
-					if (nanoTime > lastFpsCheck + 1000000000) {
-						lastFpsCheck = nanoTime;
-						currentFPS = totalFrames;
-						totalFrames = 0;
-					}
-					
-					if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
-						vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
-					}
-					
-					Graphics g = vImage.getGraphics();
-					
-					g.setColor(Color.black);
-					g.fillRect(0, 0, (int) gameWidth,(int)gameHeight);
-					
-					World.update();
-					World.render(g);
-					
-					g.setColor(Color.yellow);
-					g.setFont(new Font("Futura", Font.PLAIN, 8)); 
-					g.drawString(String.valueOf(currentFPS), (int) gameWidth - 20, 10);
-					g.dispose();
-					
-					g = canvas.getGraphics();
-					g.drawImage(vImage, 0, 0, (int) canvasWidth, (int) canvasHeight, null);
-					g.dispose();
-				}
+		GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
+		VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
+		
+		while(true) {
+			totalFrames++;
+			long nanoTime = System.nanoTime();
+			if (nanoTime > lastFpsCheck + 1000000000) {
+				lastFpsCheck = nanoTime;
+				currentFPS = totalFrames;
+				totalFrames = 0;
 			}
+			
+			if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
+				vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
+			}
+			
+			Graphics g = vImage.getGraphics();
+			((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				    RenderingHints.VALUE_ANTIALIAS_ON);
+			
+			g.setColor(Color.black);
+			g.fillRect(0, 0, (int) gameWidth,(int)gameHeight);
+			
+			World.update();
+			World.render(g);
+			
+			g.setColor(Color.yellow);
+			g.setFont(new Font("Futura", Font.PLAIN, 8)); 
+			g.drawString(String.valueOf(currentFPS), (int) gameWidth - 20, 10);
+			g.dispose();
+			
+			g = canvas.getGraphics();
+			g.drawImage(vImage, 0, 0, (int) canvasWidth, (int) canvasHeight, null);
+			g.dispose();
+		}
+	}
 	
 	private static void makeFullscreen() {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -139,6 +142,4 @@ public class Renderer {
 
 		startRendering();
 	}
-
-
 }

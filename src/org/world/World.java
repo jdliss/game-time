@@ -1,15 +1,19 @@
 package org.world;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.game.Game;
+import org.graphics.Renderer;
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
-import org.object.ZombieNormal;
 import org.object.ZombieAxis;
+import org.object.ZombieNormal;
 
 public class World {
 	
@@ -49,6 +53,11 @@ public class World {
 		for (Bullet bullet : currentWorld.bullets) {
 			bullet.render(g);
 		}
+		
+		if (playerOne.isDead) {
+			Game.handlePlayerDeath(g);	
+		}
+		
 	}
 	
 	public static void spawnZombie(int count) {		
@@ -63,9 +72,7 @@ public class World {
 				} else {
 					World.currentWorld.sprites.add(new ZombieAxis(x, y));
 				}
-				
-				
 			}
 		}
-	}	
+	}
 }

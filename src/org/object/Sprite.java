@@ -13,7 +13,6 @@ public abstract class Sprite {
 	protected float width = 0;
 	protected float height = 0;
 	
-	public boolean isSolid = false;
 	
 	public Sprite(float a, float b) {
 		this.posX = a;
