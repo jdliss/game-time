@@ -1,6 +1,5 @@
 package org.object;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
@@ -13,7 +12,7 @@ public abstract class Sprite {
 		
 	protected float width = 0;
 	protected float height = 0;
-	
+
 	public int health = 1;
 	
 	public Sprite(float a, float b) {

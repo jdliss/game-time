@@ -9,10 +9,10 @@ import org.game.Game;
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
-import org.object.Zombie;
 import org.object.ZombieNormal;
 import org.object.ZombieAxis;
 import org.object.ZombieFat;
+
 
 public class World {
 	
@@ -46,7 +46,7 @@ public class World {
 		if (destroyZombies) {
 			sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.getClass().equals(Player.class)).collect(Collectors.toList());
 			currentWorld.sprites = sprites;
-			count = 1;
+			count = 4;
 			destroyZombies = false;
 			World.playerOne.score += 50;
 		} 
@@ -65,6 +65,11 @@ public class World {
 		for (Bullet bullet : currentWorld.bullets) {
 			bullet.render(g);
 		}
+		
+		if (playerOne.isDead) {
+			Game.handlePlayerDeath(g);	
+		}
+		
 	}
 	
 	public static void spawnZombie(int count) {		
@@ -74,18 +79,29 @@ public class World {
 				int x = r.nextInt(580 - 10) + 10;
 				int y = r.nextInt(350 - 10) + 10;
 				
-				if (j % 2 == 0) {
-					World.currentWorld.sprites.add(new ZombieNormal(x, y));	
-				} else {
-					World.currentWorld.sprites.add(new ZombieAxis(x, y));
-				}
+				int[] xList = new int[3];
+				int[] yList = new int[3];
 				
+				xList[1] = 0;
+				xList[2] = 600;
+				yList[1] = 0;
+				yList[2] = 375;
+				
+				Random random = new Random();
+				int xCoord = random.nextInt(2) + 1;
+				int yCoord = random.nextInt(2) + 1;
+				
+				if (j % 2 == 0) {
+					World.currentWorld.sprites.add(new ZombieNormal(xList[xCoord], yList[yCoord]));	
+				} else {
+					World.currentWorld.sprites.add(new ZombieAxis(xList[r.nextInt(2 - 1) + 1], yList[r.nextInt(2 - 1) + 1]));
+				}
+
 				Random rand = new Random();
 				if (rand.nextInt(20) == 4) {
 					World.currentWorld.sprites.add(new ZombieFat(x, y));
-				}
-				
+				}				
 			}
 		}
-	}	
+	}
 }

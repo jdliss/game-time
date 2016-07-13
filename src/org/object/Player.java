@@ -25,6 +25,8 @@ public class Player extends Mob {
 	private static double mouseY = 0;
 	
 	public int score = 0;
+	
+	public boolean isDead = false;
 
 	public Player(float posX, float posY) {
 		super(posX, posY);
@@ -75,9 +77,10 @@ public class Player extends Mob {
 					(int) (sprite.posY + mY * deltaTime - height / 2), (int) sprite.width, (int) sprite.height);
 
 			if (myRect.intersects(otherRect)) {
-				// die
-				mX -= mX;
-				mY -= mY;
+//				// die
+//				mX -= mX;
+//				mY -= mY;
+				isDead = true;
 			}
 		}
 
@@ -116,5 +119,4 @@ public class Player extends Mob {
 		g.setColor(Color.green);
 		g.drawString("Score: " + String.valueOf(World.playerOne.score), 10, 20);
 	}
-
 }
