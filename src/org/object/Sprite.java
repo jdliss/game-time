@@ -1,6 +1,5 @@
 package org.object;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 

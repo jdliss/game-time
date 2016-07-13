@@ -9,7 +9,6 @@ import org.game.Game;
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
-import org.object.Zombie;
 import org.object.ZombieNormal;
 import org.object.ZombieAxis;
 import org.object.ZombieFat;

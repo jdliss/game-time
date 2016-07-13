@@ -3,7 +3,6 @@ package org.object;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.Iterator;
 
 import org.world.World;
 
