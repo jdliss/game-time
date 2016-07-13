@@ -35,7 +35,6 @@ public class Game {
 		World.playerOne = new Player(300, 200);
 		World.currentWorld.sprites.add(World.playerOne);
 		
-//		World.spawnZombie(1);
 		spawnInitialZombies();
 	}
 	

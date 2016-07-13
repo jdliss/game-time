@@ -25,6 +25,5 @@ public class BulletTest {
 		assertEquals(10.0, bullet.posX, 0);
 	
 	}
-
-
+	
 }

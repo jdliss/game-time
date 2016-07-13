@@ -21,8 +21,8 @@ public class ZombieTest {
 				
 		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
-		assertEquals(2, zombie.posX, 1);
-		assertEquals(2, zombie.posY, 1);
+		assertEquals(-30, zombie.posX, 5);
+		assertEquals(-30, zombie.posY, 5);
 	}
 	
 	@Test
@@ -32,8 +32,8 @@ public class ZombieTest {
 				
 		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
-		assertEquals(-19.5, zombie.posX, 1);
-		assertEquals(-11.5, zombie.posY, 1);
+		assertEquals(-59, zombie.posX, 1);
+		assertEquals(-34, zombie.posY, 1);
 	}
 	
 	
@@ -44,8 +44,8 @@ public class ZombieTest {
 				
 		zombie.goTo(player.posX, player.posY, 1, "Normal");
 		
-		assertEquals(83, zombie.posX, 1);
-		assertEquals(87, zombie.posY, 1);
+		assertEquals(126, zombie.posX, 1);
+		assertEquals(101, zombie.posY, 1);
 	}
 	
 }

@@ -77,9 +77,6 @@ public class Player extends Mob {
 					(int) (sprite.posY + mY * deltaTime - height / 2), (int) sprite.width, (int) sprite.height);
 
 			if (myRect.intersects(otherRect)) {
-//				// die
-//				mX -= mX;
-//				mY -= mY;
 				isDead = true;
 			}
 		}

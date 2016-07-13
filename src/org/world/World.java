@@ -19,6 +19,7 @@ public class World {
 	public static World currentWorld = null;
 	public static Player playerOne = null;
 	public static boolean destroyZombies = false; 
+	private static int count = 0;
 	
 	private static long lastTime = System.nanoTime();
 	
@@ -37,25 +38,13 @@ public class World {
 			bullet.update(deltaTime);
 		}
 		
-		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
-		int count = currentWorld.bullets.size() - bullets.size();
-		currentWorld.bullets = bullets;
+		updateCurrentWorldBullets();
 		
-		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-		if (destroyZombies) {
-			sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.getClass().equals(Player.class)).collect(Collectors.toList());
-			currentWorld.sprites = sprites;
-			count = 4;
-			destroyZombies = false;
-			World.playerOne.score += 50;
-		} 
-		
-		sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.health > 0).collect(Collectors.toList());
-		currentWorld.sprites = sprites;
+		updateCurrentWorldZombies();
 		
 		spawnZombie(count);
 	}
+	
 	
 	public static void render(Graphics g) {
 		for (Sprite sprite : currentWorld.sprites) {
@@ -70,6 +59,33 @@ public class World {
 			Game.handlePlayerDeath(g);	
 		}
 		
+	}
+	
+	public static void updateCurrentWorldBullets(){
+		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
+		count = currentWorld.bullets.size() - bullets.size();
+		currentWorld.bullets = bullets;
+	
+	}
+	
+	public static void updateCurrentWorldZombies(){
+		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+		 
+		checkClearBoard(sprites);
+		
+		sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.health > 0).collect(Collectors.toList());
+		currentWorld.sprites = sprites;
+	}
+	
+	public static void checkClearBoard(ArrayList<Sprite> sprites){
+		if (destroyZombies) {
+			sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.getClass().equals(Player.class)).collect(Collectors.toList());
+			currentWorld.sprites = sprites;
+			count = 4;
+			destroyZombies = false;
+			World.playerOne.score += 50;
+		}
 	}
 	
 	public static void spawnZombie(int count) {		

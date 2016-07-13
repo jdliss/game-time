@@ -49,5 +49,21 @@ public class PlayerTest {
 		assertEquals(1, World.currentWorld.bullets.size(), 0);
 	
 	}
+	
+	@Test
+	public void zombieCanKillPlayer() {
+		World.currentWorld = new World();
+		World.playerOne = new Player(300, 200);
+		World.currentWorld.sprites.add(World.playerOne);
+		World.currentWorld.sprites.add(new ZombieAxis(300,200));
+			
+		assertEquals(false, World.playerOne.isDead);
+			
+		World.update();
+			
+		assertEquals(true, World.playerOne.isDead);
+			
+		
+	}
 
 }
