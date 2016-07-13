@@ -5,23 +5,30 @@ import java.awt.Graphics;
 
 import org.world.World;
 
-public class ZombieAxis extends Zombie {
+public class ZombieFat extends Zombie {
 	
-	public ZombieAxis(float posX, float posY) {
+	
+	public ZombieFat(float posX, float posY) {
 		super(posX, posY);
 		
-		width = 10;
-		height = 10;
+		width = 25;
+		height = 25;
+		health = 8;
+		runSpeed = 15.0f;
+		
 	}
+
 	
 	public void update(float deltaTime) {
-		 goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "Axis");
+		goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "Normal");
+		
 	}
+
 	
 	public void render(Graphics g) {
-		g.setColor(Color.yellow);
+		g.setColor(Color.CYAN);
 		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 	}
+	
 
 }
-

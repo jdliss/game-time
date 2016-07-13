@@ -5,16 +5,20 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.game.Game;
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
+import org.object.Zombie;
 import org.object.ZombieNormal;
 import org.object.ZombieAxis;
+import org.object.ZombieFat;
 
 public class World {
 	
 	public static World currentWorld = null;
 	public static Player playerOne = null;
+	public static boolean destroyZombies = false; 
 	
 	private static long lastTime = System.nanoTime();
 	
@@ -37,6 +41,18 @@ public class World {
 		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
 		int count = currentWorld.bullets.size() - bullets.size();
 		currentWorld.bullets = bullets;
+		
+		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+		if (destroyZombies) {
+			sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.getClass().equals(Player.class)).collect(Collectors.toList());
+			currentWorld.sprites = sprites;
+			count = 1;
+			destroyZombies = false;
+			World.playerOne.score += 50;
+		} 
+		
+		sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.health > 0).collect(Collectors.toList());
+		currentWorld.sprites = sprites;
 		
 		spawnZombie(count);
 	}
@@ -64,6 +80,10 @@ public class World {
 					World.currentWorld.sprites.add(new ZombieAxis(x, y));
 				}
 				
+				Random rand = new Random();
+				if (rand.nextInt(20) == 4) {
+					World.currentWorld.sprites.add(new ZombieFat(x, y));
+				}
 				
 			}
 		}

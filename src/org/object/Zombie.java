@@ -73,8 +73,8 @@ public abstract class Zombie extends Mob {
 	}
 	
 	private void setIncrements(double alpha) {
-		xInc = RUNSPEED * Math.cos(alpha);
-		yInc = RUNSPEED * Math.sin(alpha);
+		xInc = runSpeed * Math.cos(alpha);
+		yInc = runSpeed * Math.sin(alpha);
 	}
 	
 	private double calculateAlpha(float distX, float distY) {
