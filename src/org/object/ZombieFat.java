@@ -7,7 +7,6 @@ import org.world.World;
 
 public class ZombieFat extends Zombie {
 	
-	
 	public ZombieFat(float posX, float posY) {
 		super(posX, posY);
 		
@@ -18,13 +17,11 @@ public class ZombieFat extends Zombie {
 		
 	}
 
-	
 	public void update(float deltaTime) {
 		goTo(World.playerOne.posX, World.playerOne.posY, deltaTime, "Normal");
 		
 	}
 
-	
 	public void render(Graphics g) {
 		g.setColor(Color.CYAN);
 		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
