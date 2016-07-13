@@ -26,7 +26,7 @@ public class ZombieFat extends Zombie {
 
 	
 	public void render(Graphics g) {
-		g.setColor(Color.BLUE);
+		g.setColor(Color.CYAN);
 		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 	}
 	
