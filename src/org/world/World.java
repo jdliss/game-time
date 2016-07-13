@@ -71,7 +71,6 @@ public class World {
 		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
 		count = currentWorld.bullets.size() - bullets.size();
 		currentWorld.bullets = bullets;
-	
 	}
 	
 	public static void updateCurrentWorldZombies(){
