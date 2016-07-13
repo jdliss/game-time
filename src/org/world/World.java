@@ -10,6 +10,7 @@ import org.object.Player;
 import org.object.Sprite;
 import org.object.ZombieNormal;
 import org.object.ZombieAxis;
+import org.object.ZombieFat;
 
 public class World {
 	
@@ -38,6 +39,10 @@ public class World {
 		int count = currentWorld.bullets.size() - bullets.size();
 		currentWorld.bullets = bullets;
 		
+		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+		sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.health > 0).collect(Collectors.toList());
+		currentWorld.sprites = sprites;
+		
 		spawnZombie(count);
 	}
 	
@@ -64,6 +69,10 @@ public class World {
 					World.currentWorld.sprites.add(new ZombieAxis(x, y));
 				}
 				
+				Random rand = new Random();
+				if (rand.nextInt(10) == 4) {
+					World.currentWorld.sprites.add(new ZombieFat(x, y));
+				}
 				
 			}
 		}
