@@ -43,8 +43,8 @@ public class Bullet extends Sprite {
 		Rectangle myRect = new Rectangle(
 				(int) (posX + mX * deltaTime - width / 2),
 				(int) (posY + mY * deltaTime - height / 2),
-				(int) width,
-				(int) height);
+				(int) width + 1,
+				(int) height + 1);
 			
 			for (Sprite sprite : World.currentWorld.sprites) { 
 				if (sprite == World.playerOne || sprite == this) {
@@ -54,8 +54,8 @@ public class Bullet extends Sprite {
 				Rectangle otherRect = new Rectangle(
 						(int) (sprite.posX + mX * deltaTime - width / 2),
 						(int) (sprite.posY + mY * deltaTime - height / 2),
-						(int) sprite.width,
-						(int) sprite.height);
+						(int) sprite.width + 1,
+						(int) sprite.height + 1);
 			
 				if (myRect.intersects(otherRect)) {
 					sprite.health -= 1;

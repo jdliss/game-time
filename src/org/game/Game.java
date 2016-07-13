@@ -6,7 +6,6 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Random;
 
 import org.graphics.Renderer;
 import org.input.Input;
@@ -33,20 +32,19 @@ public class Game {
 	
 	private static void setGameWorld() {
 		World.currentWorld = new World();
-		World.playerOne = new Player(200, 125);
+		World.playerOne = new Player(300, 200);
 		World.currentWorld.sprites.add(World.playerOne);
 		
-		World.spawnZombie(1);
+//		World.spawnZombie(1);
+		spawnInitialZombies();
 	}
 	
-//	private static void spawnInitialZombies() {
-//		for (int i = 0; i < 10; i++) {
-//			Random r = new Random();
-//			int x = r.nextInt(350 -10) + 10;
-//			int y = r.nextInt(10);
-//			World.currentWorld.sprites.add(new ZombieNormal(x, y));
-//		}
-//	}
+	private static void spawnInitialZombies() {
+		World.currentWorld.sprites.add(new ZombieNormal(0,0));
+		World.currentWorld.sprites.add(new ZombieNormal(0, 375));
+		World.currentWorld.sprites.add(new ZombieNormal(600,0));
+		World.currentWorld.sprites.add(new ZombieNormal(600,375));
+	}
 
 	
 	public static void quit() {
