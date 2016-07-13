@@ -60,6 +60,9 @@ public class Bullet extends Sprite {
 			
 				if (myRect.intersects(otherRect)) {
 					sprite.health -= 1;
+					if (sprite.getClass().equals(ZombieFat.class) && sprite.health == 0) {
+						World.destroyZombies = true;
+					}
 					this.remove = true;
 					World.playerOne.score += 10;
 				}

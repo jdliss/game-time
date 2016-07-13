@@ -7,12 +7,15 @@ import org.world.World;
 
 public class ZombieFat extends Zombie {
 	
+	
 	public ZombieFat(float posX, float posY) {
 		super(posX, posY);
 		
 		width = 25;
 		height = 25;
-		health = 4;
+		health = 8;
+		runSpeed = 15.0f;
+		
 	}
 
 	
@@ -23,7 +26,7 @@ public class ZombieFat extends Zombie {
 
 	
 	public void render(Graphics g) {
-		g.setColor(Color.ORANGE);
+		g.setColor(Color.BLUE);
 		g.fillRect((int) (posX - width / 2), (int) (posY - height / 2), (int)width, (int)height);
 	}
 	
