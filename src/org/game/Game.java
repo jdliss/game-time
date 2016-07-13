@@ -53,9 +53,18 @@ public class Game {
 	}
 	
 	public static void handlePlayerDeath(Graphics g) {
+		wipeGameState(g);
+		drawDeathScreen(g);
+		handleInput();
+	}
+	
+	private static void wipeGameState(Graphics g) { 
 		g.setColor(Color.black);
 		g.fillRect(0, 0, (int) Renderer.gameWidth, (int) Renderer.gameHeight);
 		World.currentWorld.sprites = new ArrayList<Sprite>();
+	}
+	
+	private static void drawDeathScreen(Graphics g) {
 		g.setColor(Color.red);
 		drawCenteredString(g, "GAME OVER", new Font("Futura", Font.PLAIN, 20), -50);
 		
@@ -66,10 +75,9 @@ public class Game {
 		drawCenteredString(g, "Press SPACE to restart", new Font("Futura", Font.PLAIN, 11), 30);
 		
 		g.setColor(Color.red);
-		drawCenteredString(g, "Press Q to quit", new Font("Futura", Font.PLAIN, 11), 50);		
-
+		drawCenteredString(g, "Press Q to quit", new Font("Futura", Font.PLAIN, 11), 50);
+		
 		g.dispose();
-		checkForRestart();
 	}
 	
 	private static void drawCenteredString(Graphics g, String text, Font font, int yModifier) {
@@ -81,7 +89,7 @@ public class Game {
 	    g.drawString(text, x, y + yModifier);
 	}
 	
-	private static void checkForRestart() {
+	private static void handleInput() {
 		if (Input.getKey(KeyEvent.VK_SPACE)) {
 			restart();
 		}
@@ -90,5 +98,5 @@ public class Game {
 			quit();
 		}
 	}
-
+	
 }

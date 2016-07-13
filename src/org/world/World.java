@@ -1,14 +1,11 @@
 package org.world;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.game.Game;
-import org.graphics.Renderer;
 import org.object.Bullet;
 import org.object.Player;
 import org.object.Sprite;
