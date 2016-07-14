@@ -39,9 +39,7 @@ public class World {
 		}
 		
 		updateCurrentWorldBullets();
-		
 		updateCurrentWorldZombies();
-		
 		spawnZombie(count);
 	}
 	
@@ -63,7 +61,6 @@ public class World {
 		} else {
 			Game.startScreen(g);
 		}
-		
 	}
 	
 	public static void updateCurrentWorldBullets(){

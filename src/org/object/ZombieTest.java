@@ -36,7 +36,6 @@ public class ZombieTest {
 		assertEquals(-34, zombie.posY, 1);
 	}
 	
-	
 	@Test
 	public void testMovesTowardWeirdDegree() {
 		Zombie zombie = new ZombieNormal(60, 80);
