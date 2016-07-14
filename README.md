@@ -8,13 +8,21 @@ Normally the project is done in JavaScript, however we decided to take on the ex
 
 We're using only native Java libraries, the primary one being Java AWT (Abstract Window Toolkit).
 
-#### To Run
+#### To Run from Clone and CLI
 
 * clone the project: `$ git clone git@github.com:jdliss/game-time.git`
 
 * move into the `game-time` folder: `$ cd game-time`
 
 * run the `.jar` file: `$ open game.jar`
+* 
+#### To Run from Download
+
+* Download as Zip File
+
+* Open Zip File
+
+* Click On (Open) `game.jar`
 
 #### To Build
 
