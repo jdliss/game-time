@@ -12,7 +12,9 @@ public class Bullet extends Sprite {
 	
 	private double xInc = 0;
 	private double yInc = 0;
+	
 	private double angle = 0;
+	
 	public boolean remove = false;
 	
 	public Bullet(float playerX, float playerY, double angle2) {
@@ -21,7 +23,6 @@ public class Bullet extends Sprite {
 		this.posX = playerX;
 		this.posY = playerY;
 
-		
 		width = 3;
 		height = 3;
 	}
@@ -66,7 +67,6 @@ public class Bullet extends Sprite {
 				this.remove = true;
 				World.playerOne.score += 10;
 			}
-			
 		}
 		
 		moveX(mX * deltaTime);

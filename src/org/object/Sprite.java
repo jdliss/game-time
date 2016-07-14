@@ -40,6 +40,4 @@ public abstract class Sprite {
 		return (int) (p.getY() * Renderer.scaleY);
 	}
 	
-	
-	
 }

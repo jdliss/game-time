@@ -37,5 +37,4 @@ public class WorldTest {
 		assertEquals(7, World.currentWorld.sprites.size(), 2);
 	}
 	
-
 }
