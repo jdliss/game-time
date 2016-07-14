@@ -3,7 +3,6 @@ package org.graphics;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -34,10 +33,7 @@ public class Renderer {
 	
 	public static float gameHeight = 0;
 	public static float gameWidth = 0;
-	
-	private static long lastFpsCheck = 0;
-	private static int currentFPS = 0;
-	private static int totalFrames = 0;
+
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
 		
 	public static double scaleX = 0;  
@@ -72,15 +68,7 @@ public class Renderer {
 		GraphicsConfiguration gc = canvas.getGraphicsConfiguration();
 		VolatileImage vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 		
-		while(true) {
-			totalFrames++;
-			long nanoTime = System.nanoTime();
-			if (nanoTime > lastFpsCheck + 1000000000) {
-				lastFpsCheck = nanoTime;
-				currentFPS = totalFrames;
-				totalFrames = 0;
-			}
-			
+		while(true) {			
 			if (vImage.validate(gc) == VolatileImage.IMAGE_INCOMPATIBLE) {
 				vImage = gc.createCompatibleVolatileImage((int)gameWidth, (int)gameHeight);
 			}
