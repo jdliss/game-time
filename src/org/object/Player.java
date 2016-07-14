@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
+import org.graphics.Renderer;
 import org.input.Click;
 import org.input.Input;
 import org.world.World;
@@ -83,8 +84,19 @@ public class Player extends Mob {
 
 		updateRotation(posX, posY);
 
-		moveX(mX * deltaTime);
-		moveY(mY * deltaTime);
+		mX = mX * deltaTime;
+		mY = mY * deltaTime;
+		
+		if (posX + width / 2 + mX > Renderer.gameWidth || posX - width / 2 + mX < 0) {
+			mX -= mX;
+		}
+		
+		if (posY + height / 2 + mY > Renderer.gameHeight || posY - height / 2 + mY < 0) {
+			mY -= mY;
+		}
+		
+		moveX(mX);
+		moveY(mY);
 	}
 
 	private void updateRotation(float posX, float posY) {
@@ -100,7 +112,6 @@ public class Player extends Mob {
 
 	void shoot(float posX, float posY) {
 		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
-
 	}
 
 	public void render(Graphics g) {

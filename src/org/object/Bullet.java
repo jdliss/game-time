@@ -68,6 +68,7 @@ public class Bullet extends Sprite {
 			}
 			
 		}
+		
 		moveX(mX * deltaTime);
 		moveY(mY * deltaTime);
 	}
