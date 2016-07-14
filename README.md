@@ -15,7 +15,8 @@ We're using only native Java libraries, the primary one being Java AWT (Abstract
 * move into the `game-time` folder: `$ cd game-time`
 
 * run the `.jar` file: `$ open game.jar`
-* 
+
+
 #### To Run from Download
 
 * Click on `clone or download` 
