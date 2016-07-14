@@ -8,6 +8,12 @@ Normally the project is done in JavaScript, however we decided to take on the ex
 
 We're using only native Java libraries, the primary one being Java AWT (Abstract Window Toolkit).
 
+#### Important!
+
+* before running the game, update your Java to Java 8
+
+* [java 8 download page](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
+
 #### To Run from Clone and CLI
 
 * clone the project: `$ git clone git@github.com:jdliss/game-time.git`
