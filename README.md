@@ -39,7 +39,7 @@ We're using only native Java libraries, the primary one being Java AWT (Abstract
 
 * select GameTime from list of projects 
 
-* deselect `start build immedietely`
+* deselect `start build immediately`
 
 * click OK
 
