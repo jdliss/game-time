@@ -80,7 +80,7 @@ public class Renderer {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, (int) gameWidth,(int)gameHeight);
 			
-			g.setColor(Color.blue);
+			g.setColor(Color.green);
 			g.drawRect(0, 0, (int) Renderer.gameWidth - 1, (int) Renderer.gameHeight - 1);
 			
 			World.update();

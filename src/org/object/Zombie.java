@@ -56,11 +56,7 @@ public abstract class Zombie extends Mob {
 		Random r = new Random();
 		int randomInt = r.nextInt(2);
 		
-		if (zombieType == "Axis") {
-			setIncrements(alpha + randomInt);
-		} else {
-			setIncrements(alpha - randomInt);
-		}
+		setIncrements(alpha + randomInt);
 	}
 	
 	private void calculateIncNormal(float playerX, float playerY) {
