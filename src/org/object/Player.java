@@ -24,6 +24,8 @@ public class Player extends Mob {
 	
 	private static double mouseX = 0;
 	private static double mouseY = 0;
+	private static float mX = 0;
+	private static float mY = 0;
 	
 	public int score = 0;
 	
@@ -38,12 +40,16 @@ public class Player extends Mob {
 
 	public void update(float deltaTime) {
 		handleInput(deltaTime);
+		handleSpriteCollision(deltaTime);
+		updateRotation(posX, posY);
+		mX = mX * deltaTime;
+		mY = mY * deltaTime;
+		handleWallCollision();
+		moveX(mX);
+		moveY(mY);
 	}
 
 	private void handleInput(float deltaTime) {
-
-		float mX = 0;
-		float mY = 0;
 
 		if (Input.getKey(KeyEvent.VK_W)) {
 			mY -= RUNSPEED;
@@ -64,7 +70,10 @@ public class Player extends Mob {
 		if (Click.getButton(MouseEvent.BUTTON1)) {
 			shoot(posX, posY);
 		}
-
+		
+	}
+	
+	private void handleSpriteCollision(float deltaTime) {
 		Rectangle myRect = new Rectangle((int) (posX + mX * deltaTime - width / 2),
 				(int) (posY + mY * deltaTime - height / 2), (int) width, (int) height);
 
@@ -81,12 +90,9 @@ public class Player extends Mob {
 				isDead = true;
 			}
 		}
-
-		updateRotation(posX, posY);
-
-		mX = mX * deltaTime;
-		mY = mY * deltaTime;
-		
+	}
+	
+	private void handleWallCollision() {
 		if (posX + width / 2 + mX > Renderer.gameWidth || posX - width / 2 + mX < 0) {
 			mX -= mX;
 		}
@@ -94,9 +100,6 @@ public class Player extends Mob {
 		if (posY + height / 2 + mY > Renderer.gameHeight || posY - height / 2 + mY < 0) {
 			mY -= mY;
 		}
-		
-		moveX(mX);
-		moveY(mY);
 	}
 
 	private void updateRotation(float posX, float posY) {
