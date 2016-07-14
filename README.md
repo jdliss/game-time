@@ -18,6 +18,8 @@ We're using only native Java libraries, the primary one being Java AWT (Abstract
 * 
 #### To Run from Download
 
+* Click on `clone or download` 
+
 * Download as Zip File
 
 * Open Zip File
