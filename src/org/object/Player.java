@@ -50,7 +50,6 @@ public class Player extends Mob {
 	}
 
 	private void handleInput(float deltaTime) {
-
 		if (Input.getKey(KeyEvent.VK_W)) {
 			mY -= RUNSPEED;
 		}
@@ -70,7 +69,6 @@ public class Player extends Mob {
 		if (Click.getButton(MouseEvent.BUTTON1)) {
 			shoot(posX, posY);
 		}
-		
 	}
 	
 	private void handleSpriteCollision(float deltaTime) {
