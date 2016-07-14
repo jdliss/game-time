@@ -65,7 +65,7 @@ public class Renderer {
 		canvasWidth = gameWidth * factor;
 		canvasHeight = gameHeight * factor;
 		scaleX = GAME_WIDTH / (SCREEN_SIZE.getWidth() - (SCREEN_SIZE.getWidth() * 0.06));
-		scaleY =GAME_HEIGHT / (SCREEN_SIZE.getHeight() - (SCREEN_SIZE.getHeight() * 0.06));
+		scaleY = GAME_HEIGHT / (SCREEN_SIZE.getHeight() - (SCREEN_SIZE.getHeight() * 0.06));
 	}	
 	
 	private static void startRendering() {
@@ -92,17 +92,16 @@ public class Renderer {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, (int) gameWidth,(int)gameHeight);
 			
+			g.setColor(Color.blue);
+			g.drawRect(0, 0, (int) Renderer.gameWidth - 1, (int) Renderer.gameHeight - 1);
+			
 			World.update();
 			World.render(g);
-			
-			g.setColor(Color.yellow);
-			g.setFont(new Font("Futura", Font.PLAIN, 8)); 
-			g.drawString(String.valueOf(currentFPS), (int) gameWidth - 20, 10);
-			g.dispose();
-			
+
 			g = canvas.getGraphics();
 			g.drawImage(vImage, 0, 0, (int) canvasWidth, (int) canvasHeight, null);
 			g.dispose();
+			Toolkit.getDefaultToolkit().sync();
 		}
 	}
 	

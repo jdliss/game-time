@@ -47,27 +47,28 @@ public class Bullet extends Sprite {
 				(int) width + 1,
 				(int) height + 1);
 			
-			for (Sprite sprite : World.currentWorld.sprites) { 
-				if (sprite == World.playerOne || sprite == this) {
-					continue;
-				}
-				
-				Rectangle otherRect = new Rectangle(
-						(int) (sprite.posX + mX * deltaTime - width / 2),
-						(int) (sprite.posY + mY * deltaTime - height / 2),
-						(int) sprite.width + 1,
-						(int) sprite.height + 1);
+		for (Sprite sprite : World.currentWorld.sprites) { 
+			if (sprite == World.playerOne || sprite == this) {
+				continue;
+			}
 			
-				if (myRect.intersects(otherRect)) {
-					sprite.health -= 1;
-					if (sprite.getClass().equals(ZombieFat.class) && sprite.health == 0) {
-						World.destroyZombies = true;
-					}
-					this.remove = true;
-					World.playerOne.score += 10;
+			Rectangle otherRect = new Rectangle(
+					(int) (sprite.posX + mX * deltaTime - width / 2),
+					(int) (sprite.posY + mY * deltaTime - height / 2),
+					(int) sprite.width + 1,
+					(int) sprite.height + 1);
+		
+			if (myRect.intersects(otherRect)) {
+				sprite.health -= 1;
+				if (sprite.getClass().equals(ZombieFat.class) && sprite.health == 0) {
+					World.destroyZombies = true;
 				}
+				this.remove = true;
+				World.playerOne.score += 10;
+			}
 			
 		}
+		
 		moveX(mX * deltaTime);
 		moveY(mY * deltaTime);
 	}
