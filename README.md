@@ -1,4 +1,4 @@
-## Game Time
+## SquarePocalypse
 
 #### This is the module 4 project Game Time.
 
