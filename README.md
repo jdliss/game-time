@@ -8,6 +8,10 @@ Normally the project is done in JavaScript, however we decided to take on the ex
 
 We're using only native Java libraries, the primary one being Java AWT (Abstract Window Toolkit).
 
+#### Gameplay
+
+![Gameplay](http://g.recordit.co/2mlKV4JWsB.gif)
+
 #### Important!
 
 * before running the game, update your Java to Java 8
