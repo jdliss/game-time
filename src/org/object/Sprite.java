@@ -7,8 +7,8 @@ import org.graphics.Renderer;
 
 public abstract class Sprite {
 	
-	protected float posX = 0;
-	protected float posY = 0;
+	public float posX = 0;
+	public float posY = 0;
 		
 	protected float width = 0;
 	protected float height = 0;

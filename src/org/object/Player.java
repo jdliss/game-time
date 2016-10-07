@@ -66,9 +66,9 @@ public class Player extends Mob {
 			mX += RUNSPEED;
 		}
 
-		if (Click.getButton(MouseEvent.BUTTON1)) {
-			shoot(posX, posY);
-		}
+//		if (Click.getButton(MouseEvent.BUTTON1)) {
+//			shoot(posX, posY);
+//		}
 	}
 	
 	private void handleSpriteCollision(float deltaTime) {
@@ -111,7 +111,7 @@ public class Player extends Mob {
 		angle = Math.atan2(centerY - mouseY, centerX - mouseX) - Math.PI / 2;
 	}
 
-	void shoot(float posX, float posY) {
+	public void shoot(float posX, float posY) {
 		World.currentWorld.bullets.add(new Bullet(posX, posY, angle));
 	}
 
