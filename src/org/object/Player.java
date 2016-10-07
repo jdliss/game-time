@@ -7,12 +7,10 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.util.Iterator;
 
 import org.graphics.Renderer;
-import org.input.Click;
 import org.input.Input;
 import org.world.World;
 
@@ -66,9 +64,6 @@ public class Player extends Mob {
 			mX += RUNSPEED;
 		}
 
-//		if (Click.getButton(MouseEvent.BUTTON1)) {
-//			shoot(posX, posY);
-//		}
 	}
 	
 	private void handleSpriteCollision(float deltaTime) {
