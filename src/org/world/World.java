@@ -25,34 +25,27 @@ public class World {
 	
 	public ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 	public ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	
+	public static boolean rendering = false;
+	public static boolean updating = false;
 
 	public static void update() {
+		updating = true;
 		float deltaTime = (System.nanoTime() - lastTime) / 1000000000.0f;
 		lastTime = System.nanoTime();
 		
-		for (Sprite sprite : currentWorld.sprites) {
-			sprite.update(deltaTime);
-		}
-		
-		for (Bullet bullet : currentWorld.bullets) {
-			bullet.update(deltaTime);
-		}
-		
-		updateCurrentWorldBullets();
-		updateCurrentWorldZombies();
+		updateCurrentWorldBullets(deltaTime);
+		updateCurrentWorldZombies(deltaTime);
 		spawnZombie(count);
+		updating = false;
 	}
 	
 	
 	public static void render(Graphics g) {
+		rendering = true;
 		if (Game.started) {
-			for (Sprite sprite : currentWorld.sprites) {
-				sprite.render(g);
-			}
-			
-			for (Bullet bullet : currentWorld.bullets) {
-				bullet.render(g);
-			}
+			renderSprites(g);
+			renderBullets(g);
 			
 			if (playerOne.isDead) {
 				Game.handlePlayerDeath(g);	
@@ -61,20 +54,39 @@ public class World {
 		} else {
 			Game.startScreen(g);
 		}
+		rendering = false;
 	}
 	
-	public static void updateCurrentWorldBullets(){
+	private static void renderBullets(Graphics g) {
+		for (Bullet bullet : currentWorld.bullets) {
+			bullet.render(g);
+		}
+	}
+	
+	private static void renderSprites(Graphics g) {
+		for (Sprite sprite : currentWorld.sprites) {
+			sprite.render(g);
+		}
+	}
+	
+	public static void updateCurrentWorldBullets(float deltaTime){
+		for (Bullet bullet : currentWorld.bullets) {
+			bullet.update(deltaTime);
+		}
+		
 		ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 		bullets = (ArrayList<Bullet>) currentWorld.bullets.stream().filter(e -> !e.remove).collect(Collectors.toList());
 		count = currentWorld.bullets.size() - bullets.size();
 		currentWorld.bullets = bullets;
 	}
 	
-	public static void updateCurrentWorldZombies(){
-		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-		 
-		checkClearBoard(sprites);
+	public static void updateCurrentWorldZombies(float deltaTime){
+		for (Sprite sprite : currentWorld.sprites) {
+			sprite.update(deltaTime);
+		}
 		
+		ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+		checkClearBoard(sprites);
 		sprites = (ArrayList<Sprite>) currentWorld.sprites.stream().filter(e -> e.health > 0).collect(Collectors.toList());
 		currentWorld.sprites = sprites;
 	}
